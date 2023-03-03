@@ -6,13 +6,10 @@ using System.Threading.Tasks;
 
 namespace LexiconLMS.Shared
 {
-    public class User
+    public class Course
     {
         public int UniqueID { get; set; }
         public string Name { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
-        public int Course_id { get; set; }
-
+        public string Desc { get; set; }
     }
 }
