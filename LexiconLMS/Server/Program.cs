@@ -1,14 +1,18 @@
+using LexiconLMS.Server;
 using LexiconLMS.Server.Data;
+using LexiconLMS.Server.Extensions;
 using LexiconLMS.Server.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
+using static System.Formats.Asn1.AsnWriter;
 
 namespace LexiconLMS
 {
     public class Program
     {
-        public static void Main(string[] args)
+        /*public static void Main*/
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
@@ -29,8 +33,21 @@ namespace LexiconLMS
 
             builder.Services.AddControllersWithViews();
             builder.Services.AddRazorPages();
-
             var app = builder.Build();
+
+            //var scope = app.ApplicationServices.CreateScope();
+            //var serviceProvider = scope.ServiceProvider;
+            //var db = serviceProvider.GetRequiredService<ApplicationDbContext>();
+
+            ////db.Database.EnsureDeleted();
+            ////db.Database.Migrate();
+
+            ////dotnet user-secrets set "AdminPW" "BytMig123!"
+            //var config = serviceProvider.GetRequiredService<IConfiguration>();
+            //var adminPW = config["AdminPW"];
+
+            await app.SeedDataAsync();
+
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())

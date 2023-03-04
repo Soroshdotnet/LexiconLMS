@@ -8,7 +8,7 @@ namespace LexiconLMS.Shared
 {
     public class Activity
     {
-        public int UniqueID { get; set; }
+        public int ID { get; set; }
         public string Name { get; set; }
         public string Desc { get; set; }
         public DateTime StartTime { get; set; }
