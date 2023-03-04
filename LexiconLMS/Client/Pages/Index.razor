@@ -1,14 +1,41 @@
 ﻿@page "/"
-@using LexiconLMS.Client.Component
+@using LexiconLMS.Client.Components
+@using LexiconLMS.Client.Pages
 
 
-<ModalLogin></ModalLogin>
+
+<AuthorizeView>
+    <Authorized>
+       Inloggad
+    </Authorized>
+    <NotAuthorized>
+        Ej inloggad
+        <ModalLogin AddDevices="AddDevices"></ModalLogin>
+        
+    </NotAuthorized>
+</AuthorizeView>
+
+<button @onclick="() => AddDevices()" @onclick:preventDefault="true" id="addItemBtn" class="btn btn-info">Rerender parent</button>
+@*@if (context.User.Identity?.IsAuthenticated != true)
+{
+    <p>Logga in!!!</p>
+}
+else
+{
+    <p role="alert">You are not authorized to access this resource.</p>
+}*@
 
 
 @code {
     //Todo
     //CHECK-inside component: 1. Open modal for login if not logged in 
     // Close modal when logged in
+
+    private void AddDevices()
+    {
+        Console.WriteLine("ShouldRender.");
+        ShouldRender();
+    }
 
 
 }

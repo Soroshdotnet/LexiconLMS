@@ -1,0 +1,63 @@
+﻿@using LexiconLMS.Client.Pages
+@inject IJSRuntime JS
+
+<div 
+    class="modal @ModalClass" 
+    tabindex="-1" 
+    role="dialog" 
+    style="display:@ModalDisplay"
+>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <iframe src="/Identity/Account/Login" style="border:none; width: 520px; height: 520px;"></iframe>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" @onclick="() => Close()">Close</button>
+            <button @onclick="OnAddDevices" @onclick:preventDefault="true" id="addItemBtn" class="btn btn-info">Rerender parent</button>
+             
+        </div>
+    </div>
+</div>
+
+
+@if (ShowBackdrop)
+{
+    <div class="modal-backdrop fade show"></div>
+}
+
+
+@code {
+
+
+    public Guid Guid = Guid.NewGuid();
+    public string ModalDisplay = "none;";
+    public string ModalClass = "";
+    public bool ShowBackdrop = false;
+
+    public void Open()
+    {
+        ModalDisplay = "block;";
+        ModalClass = "Show";
+        ShowBackdrop = true;
+        StateHasChanged();
+        JS.InvokeVoidAsync("alert", "Hello");
+    }
+
+    public void Close()
+    {
+        ModalDisplay = "none";
+        ModalClass = "";
+        ShowBackdrop = false;
+        StateHasChanged();
+        //ShouldRender();
+        JS.InvokeVoidAsync("alert", "alert");
+        JS.InvokeVoidAsync("reloadParent", "reloadParent");
+    }
+
+    [Parameter]
+    public EventCallback AddDevices { get; set; }
+
+    public async void OnAddDevices()
+    {
+        await AddDevices.InvokeAsync();        
+    }
+    
+}
