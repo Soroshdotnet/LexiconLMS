@@ -4,16 +4,6 @@
 
 
 
-<AuthorizeView>
-    <Authorized>
-       Inloggad
-    </Authorized>
-    <NotAuthorized>
-        Ej inloggad
-        <ModalLogin AddDevices="AddDevices"></ModalLogin>
-        
-    </NotAuthorized>
-</AuthorizeView>
 
 <button @onclick="() => AddDevices()" @onclick:preventDefault="true" id="addItemBtn" class="btn btn-info">Rerender parent</button>
 @*@if (context.User.Identity?.IsAuthenticated != true)
@@ -33,8 +23,25 @@ else
 
     private void AddDevices()
     {
+        //Denna körs
         Console.WriteLine("ShouldRender.");
+
+        //Men troligen inte denna...
         ShouldRender();
+    }
+    
+    [CascadingParameter] 
+    private Task<AuthenticationState> authenticationStateTask { get; set; }
+    
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await authenticationStateTask;
+        var user = authState.User;
+
+        if (user.Identity.IsAuthenticated)
+        {
+            Console.WriteLine($"{user.Identity.Name} is authenticated.");
+        }
     }
 
 
