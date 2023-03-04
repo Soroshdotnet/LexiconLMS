@@ -1,5 +1,5 @@
 ﻿@using LexiconLMS.Client.Pages
-@inject IJSRuntime JS
+@inject IJSRuntime JavaScript
 
 <div 
     class="modal @ModalClass" 
@@ -28,9 +28,9 @@
 
 
     public Guid Guid = Guid.NewGuid();
-    public string ModalDisplay = "none;";
+    public string ModalDisplay = "block;";
     public string ModalClass = "";
-    public bool ShowBackdrop = false;
+    public bool ShowBackdrop = true;
 
     public void Open()
     {
@@ -38,7 +38,7 @@
         ModalClass = "Show";
         ShowBackdrop = true;
         StateHasChanged();
-        JS.InvokeVoidAsync("alert", "Hello");
+        
     }
 
     public void Close()
@@ -48,8 +48,8 @@
         ShowBackdrop = false;
         StateHasChanged();
         //ShouldRender();
-        JS.InvokeVoidAsync("alert", "alert");
-        JS.InvokeVoidAsync("reloadParent", "reloadParent");
+        
+        JavaScript.InvokeVoidAsync("reloadParent", "reloadParent");
     }
 
     [Parameter]
