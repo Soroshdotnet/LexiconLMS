@@ -1,48 +1,53 @@
 ﻿@page "/"
 @using LexiconLMS.Client.Components
 @using LexiconLMS.Client.Pages
+@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@inject IJSRuntime JavaScript
 
 
-
-
-<button @onclick="() => AddDevices()" @onclick:preventDefault="true" id="addItemBtn" class="btn btn-info">Rerender parent</button>
-@*@if (context.User.Identity?.IsAuthenticated != true)
-{
-    <p>Logga in!!!</p>
-}
-else
-{
-    <p role="alert">You are not authorized to access this resource.</p>
-}*@
+<AuthorizeView>
+    <Authorized>
+        <LoginDisplay />
+        <p><a href="/StudentLandingPage">Student</a></p>
+        <p><a href="/TeacherLandingPage">Teacher</a></p>
+        
+        
+    </Authorized>
+    <NotAuthorized>
+        <ModalLogin RerenderParent="RerenderParent"></ModalLogin>
+    </NotAuthorized>
+</AuthorizeView>
 
 
 @code {
-    //Todo
-    //CHECK-inside component: 1. Open modal for login if not logged in 
-    // Close modal when logged in
 
-    private void AddDevices()
-    {
-        //Denna körs
-        Console.WriteLine("ShouldRender.");
-
-        //Men troligen inte denna...
-        ShouldRender();
-    }
     
-    [CascadingParameter] 
-    private Task<AuthenticationState> authenticationStateTask { get; set; }
-    
-    protected override async Task OnInitializedAsync()
-    {
-        var authState = await authenticationStateTask;
-        var user = authState.User;
 
-        if (user.Identity.IsAuthenticated)
-        {
-            Console.WriteLine($"{user.Identity.Name} is authenticated.");
-        }
+
+
+    //[CascadingParameter] 
+    //private Task<AuthenticationState> authenticationStateTask { get; set; }
+    
+    private async void RerenderParent()
+    {
+
+        //calls javascript.js to reload when logged in
+        await JavaScript.InvokeVoidAsync("reloadParent", "reloadParent");
+
+
+        //for future use when fetching auth is working...
+        //var authState = await authenticationStateTask;
+        //var user = authState.User;
+
+        
+        //Console.WriteLine("ShouldRender.");
+        //var x = ShouldRender();
     }
+
+    
+
+    
 
 
 }

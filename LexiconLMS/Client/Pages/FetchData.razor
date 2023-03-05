@@ -11,6 +11,14 @@
 
 <p>This component demonstrates fetching data from the server.</p>
 
+<button @onclick="() => getUserData()">get userdata</button>
+
+@if (userData != null)
+{
+    <p><em>UserData...</em></p>
+}
+
+
 @if (forecasts == null)
 {
     <p><em>Loading...</em></p>
@@ -42,12 +50,17 @@ else
 
 @code {
     private WeatherForecast[]? forecasts;
+    private RemoteUserAccount? userData;
 
+    public async void getUserData(){
+        userData = await Http.GetFromJsonAsync<RemoteUserAccount>("8c3299a9-b069-4078-9404-651864fa08f6");
+    }
     protected override async Task OnInitializedAsync()
     {
         try
         {
             forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("WeatherForecast");
+            userData = await Http.GetFromJsonAsync<RemoteUserAccount>("8c3299a9-b069-4078-9404-651864fa08f6");
         }
         catch (AccessTokenNotAvailableException exception)
         {

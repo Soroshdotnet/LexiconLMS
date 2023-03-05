@@ -1,0 +1,109 @@
+﻿@page "/"
+@using LexiconLMS.Client.Components
+@using LexiconLMS.Client.Pages
+@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+
+
+
+<AuthorizeView>
+    <Authorized>
+        <LoginDisplay />
+        
+        
+        
+    </Authorized>
+    <NotAuthorized>
+        <ModalLogin RerenderParent="RerenderParent"></ModalLogin>
+    </NotAuthorized>
+</AuthorizeView>
+
+@*
+//For future use
+@if (!isAuthenticated)
+{
+
+}
+else{
+    
+}*@
+
+
+@code {
+    //Todo
+    //CHECK-inside component: 1. Open modal for login if not logged in 
+    // Close modal when logged in
+
+    private async void RerenderParent()
+    {
+        var authState = await authenticationStateTask;
+        var user = authState.User;
+        var isAuth = user.Identity.IsAuthenticated;
+        if (isAuth)
+        {
+
+            isAuthenticated = true;
+        }
+        else
+        {
+
+        }
+
+
+        Console.WriteLine("ShouldRender.");
+
+        var x = ShouldRender();
+    }
+
+
+
+    protected override async void OnAfterRender(bool firstRender)
+    {
+        
+        var authState = await authenticationStateTask;
+        var user = authState.User;
+        var isAuth = user.Identity.IsAuthenticated;
+        if (isAuth)
+        {
+
+            isAuthenticated = true;
+        }
+        else
+        {
+
+        }
+
+    }
+    
+
+    [CascadingParameter] 
+    private Task<AuthenticationState> authenticationStateTask { get; set; }
+
+    private bool isAuthenticated { get; set; } = false;
+    private bool isRerenderedAfterAuth { get; set; } = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await authenticationStateTask;
+        var user = authState.User;
+
+        if (!isRerenderedAfterAuth)
+        {
+            
+            isRerenderedAfterAuth = true;
+            Console.WriteLine($"{user.Identity.Name} is rendered after auth.");
+            ShouldRender();
+            
+        }
+
+        if (user.Identity.IsAuthenticated)
+        {
+            isAuthenticated = true;
+            Console.WriteLine($"{user.Identity.Name} is authenticated.");
+        }
+    }
+
+    
+
+
+}

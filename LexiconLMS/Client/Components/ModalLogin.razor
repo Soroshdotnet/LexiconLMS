@@ -1,5 +1,5 @@
 ﻿@using LexiconLMS.Client.Pages
-@inject IJSRuntime JavaScript
+
 
 <div 
     class="modal @ModalClass" 
@@ -10,8 +10,8 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <iframe src="/Identity/Account/Login" style="border:none; width: 520px; height: 520px;"></iframe>
-            <button type="button" class="btn btn-secondary" data-dismiss="modal" @onclick="() => Close()">Close</button>
-            <button @onclick="OnAddDevices" @onclick:preventDefault="true" id="addItemBtn" class="btn btn-info">Rerender parent</button>
+            
+            <button @onclick="OnRerenderParent" @onclick:preventDefault="true" id="addItemBtn" class="btn btn-info">Close after login</button>
              
         </div>
     </div>
@@ -41,23 +41,15 @@
         
     }
 
-    public void Close()
+    [Parameter]
+    public EventCallback RerenderParent { get; set; }
+
+    public async void OnRerenderParent()
     {
         ModalDisplay = "none";
         ModalClass = "";
         ShowBackdrop = false;
-        StateHasChanged();
-        //ShouldRender();
-        
-        JavaScript.InvokeVoidAsync("reloadParent", "reloadParent");
-    }
-
-    [Parameter]
-    public EventCallback AddDevices { get; set; }
-
-    public async void OnAddDevices()
-    {
-        await AddDevices.InvokeAsync();        
+        await RerenderParent.InvokeAsync();
     }
     
 }

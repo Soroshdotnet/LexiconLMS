@@ -1,0 +1,24 @@
+﻿<div id="moduleActivites">
+    <b>Aktiviteter</b>
+    <ul>
+        <li @onclick="() => doSomething()"><EditButton Left="-5px" Top="-2px" StartEditing="doSomething2" />Introduktion</li>
+        <li @onclick="() => doSomething()"><EditButton Left="-5px" Top="-2px" StartEditing="doSomething2" />E-learningkurs 1</li>
+        <li @onclick="() => doSomething()"><EditButton Left="-5px" Top="-2px" StartEditing="doSomething2" />Föreläsning 1</li>
+        <li @onclick="() => doSomething()"><EditButton Left="-5px" Top="-2px" StartEditing="doSomething2" />Workshop</li>
+        <li @onclick="() => doSomething()"><EditButton Left="-5px" Top="-2px" StartEditing="doSomething2" />Eget arbete</li>
+    </ul>
+</div>
+
+@code {
+
+    private void doSomething()
+    {
+        Console.WriteLine("From activities");
+    }
+    
+    private async void doSomething2()
+    {
+        Console.WriteLine("From activitites, edit button2");
+    }
+
+}
