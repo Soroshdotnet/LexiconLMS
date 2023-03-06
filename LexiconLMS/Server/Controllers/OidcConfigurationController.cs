@@ -10,16 +10,16 @@ namespace LexiconLMS.Server.Controllers
     {
         private readonly ILogger<OidcConfigurationController> _logger;
 
-        private readonly IMapper _mapper;
-        private readonly UserManager<ApplicationUser> _applicationUserManager;
+        //private readonly IMapper _mapper;
+        //private readonly UserManager<ApplicationUser> _applicationUserManager;
 
-        public OidcConfigurationController(IClientRequestParametersProvider clientRequestParametersProvider, ILogger<OidcConfigurationController> logger,
-            IMapper mapper, UserManager<ApplicationUser> applicationUserManager)
+        public OidcConfigurationController(IClientRequestParametersProvider clientRequestParametersProvider, ILogger<OidcConfigurationController> logger
+            /*IMapper mapper, *//*UserManager<ApplicationUser> applicationUserManager*/)
         {
             ClientRequestParametersProvider = clientRequestParametersProvider;
             _logger = logger;
-            _mapper = mapper;
-            _applicationUserManager = applicationUserManager;
+            //_mapper = mapper;
+            //_applicationUserManager = applicationUserManager;
         }
 
         public IClientRequestParametersProvider ClientRequestParametersProvider { get; }
