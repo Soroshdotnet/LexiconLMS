@@ -99,7 +99,7 @@ namespace LexiconLMS.Server
             app.MapFallbackToFile("index.html");
 
             app.Run();
-            return Task.CompletedTask;
+            return /*Task.CompletedTask*/;
         }
     }
 }
