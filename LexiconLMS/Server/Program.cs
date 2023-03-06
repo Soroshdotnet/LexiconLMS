@@ -1,4 +1,3 @@
-using LexiconLMS.Server;
 using LexiconLMS.Server.Data;
 using LexiconLMS.Server.Extensions;
 using LexiconLMS.Server.Models;
@@ -8,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using static System.Formats.Asn1.AsnWriter;
 using LexiconLMS.Server.MyModels;
 
-namespace LexiconLMS
+namespace LexiconLMS.Server
 {
     public class Program
     {
