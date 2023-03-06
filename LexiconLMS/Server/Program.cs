@@ -6,14 +6,18 @@ using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
 using static System.Formats.Asn1.AsnWriter;
 using LexiconLMS.Server.MyModels;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace LexiconLMS.Server
 {
-    public class Program
+    public /*static*/ class Program
     {
         /*public static void Main*/
-        public static async Task Main(string[] args)
+        /* async Task */
+        /*public static void*/
+        public static async Task Main(string[] args, IServiceProvider serviceProvider)
         {
+            //IServiceProvider serviceProvider = new();
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
@@ -21,7 +25,11 @@ namespace LexiconLMS.Server
 
             //builder.Services.AddAutoMapper(typeof(Program));
 
-            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+            // Make sure we have the database
+            serviceProvider.GetService<ApplicationDbContext>().Database.EnsureCreated();
+        
+
+        builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(connectionString));
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
@@ -38,6 +46,8 @@ namespace LexiconLMS.Server
             builder.Services.AddRazorPages();
             //builder.MyModels.MockDataService();
             var app = builder.Build();
+
+            //await app;
 
             //var scope = app.ApplicationServices.CreateScope();
             //var serviceProvider = scope.ServiceProvider;
@@ -84,6 +94,9 @@ namespace LexiconLMS.Server
             app.MapFallbackToFile("index.html");
 
             app.Run();
+
+            //await builder.Build().RunAsync();
+
         }
     }
 }

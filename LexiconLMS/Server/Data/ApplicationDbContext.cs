@@ -30,10 +30,10 @@ namespace LexiconLMS.Server.Data
 
 
             modelBuilder.Entity<Activity>().HasData(
-                 new Activity { /*ID = -1, Desc = "abc", Activity_TypeID = -1, Module_id = -1, */Name = "ABC" },
-                   new Activity { /*ID = -2, Desc = "def", Activity_TypeID = -2, Module_id = -2, */Name = "DEF" },
-                   new Activity { /*ID = -3, Desc = "ghi", Activity_TypeID = -3, Module_id = -3,*/ Name = "GHI" },
-                   new Activity { /*ID = -4, Desc = "jkl", Activity_TypeID = -4, Module_id = -4, */Name = "JKL" }
+                 new Activity { Id = -11,/*ID = -1, Desc = "abc", Activity_TypeID = -1, Module_id = -1, */Name = "ABC" },
+                   new Activity { Id = -12,/*ID = -2, Desc = "def", Activity_TypeID = -2, Module_id = -2, */Name = "DEF" },
+                   new Activity { Id = -13,/*ID = -3, Desc = "ghi", Activity_TypeID = -3, Module_id = -3,*/ Name = "GHI" },
+                   new Activity { Id = -14,/*ID = -4, Desc = "jkl", Activity_TypeID = -4, Module_id = -4, */Name = "JKL" }
                 );
 
             modelBuilder.Entity<Activity_type>().HasData(
@@ -53,8 +53,8 @@ new ApplicationUser { Id = "-2", UserName = "def", Email = "def@hotmail.com"
 );
 
             modelBuilder.Entity<Course>().HasData(
-new Course { /*ID = -1, */Desc = "-1", Name = "Programming .NET" },
-new Course { /*ID = -2, */Desc = "-2", Name = "Programming Frontend" }
+new Course { Id = -12,/*ID = -1, */Desc = "-1", Name = "Programming .NET" },
+new Course { Id = -13,/*ID = -2, */Desc = "-2", Name = "Programming Frontend" }
 );
 
             modelBuilder.Entity<Document>().HasData(
@@ -65,7 +65,7 @@ new Document { Id = -11/*ID = -2, Module_id = -1, Lesson_id = -1, Course_id = -1
             modelBuilder.Entity<Module>().HasData(
 new Module
 {
-    //ID = -1,
+    Id = -14,//ID = -1,
     Name = "C#",
     Desc = "abc",
     //Course_id = -1,
@@ -75,7 +75,7 @@ CultureInfo.InvariantCulture/*null*/),
 },
 new Module
 {
-    //ID = -2,
+    Id = -15,//ID = -2,
     Name = "Azure",
     Desc = "def",
     //Course_id = -2,
