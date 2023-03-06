@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
 using static System.Formats.Asn1.AsnWriter;
+using LexiconLMS.Server.MyModels;
 
 namespace LexiconLMS
 {
@@ -18,6 +19,9 @@ namespace LexiconLMS
 
             // Add services to the container.
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+
+            //builder.Services.AddAutoMapper(typeof(Program));
+
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(connectionString));
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
@@ -33,6 +37,7 @@ namespace LexiconLMS
 
             builder.Services.AddControllersWithViews();
             builder.Services.AddRazorPages();
+            //builder.MyModels.MockDataService();
             var app = builder.Build();
 
             //var scope = app.ApplicationServices.CreateScope();
@@ -46,7 +51,9 @@ namespace LexiconLMS
             //var config = serviceProvider.GetRequiredService<IConfiguration>();
             //var adminPW = config["AdminPW"];
 
-            await app.SeedDataAsync();
+            //await app.SeedDataAsync();
+
+            MockDataService.ApplicationUsers();
 
 
             // Configure the HTTP request pipeline.

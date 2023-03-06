@@ -4,6 +4,7 @@ using LexiconLMS.Server.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LexiconLMS.Server.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230306114247_AttilaStarkenius6.3.2023.fixingapplicationdbcontext.csclass")]
+    partial class AttilaStarkenius632023fixingapplicationdbcontextcsclass
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -348,7 +351,7 @@ namespace LexiconLMS.Server.Data.Migrations
                         {
                             Id = "-1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "bf16bc8b-3441-44e7-a153-c5976881a12d",
+                            ConcurrencyStamp = "de2e9076-1295-4a8a-aa6e-e526a4c7f3d1",
                             Course_id = -1,
                             Email = "abc@hotmail.com",
                             EmailConfirmed = false,
@@ -356,7 +359,7 @@ namespace LexiconLMS.Server.Data.Migrations
                             Name = "ABC",
                             Password = "abc",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "109c4d1b-d037-4050-a766-3220e5e3c0fd",
+                            SecurityStamp = "d09f014e-887a-4b00-b5a2-1a73c3dd3393",
                             TwoFactorEnabled = false,
                             UserName = "abc"
                         },
@@ -364,7 +367,7 @@ namespace LexiconLMS.Server.Data.Migrations
                         {
                             Id = "-2",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c5894681-baac-4eaa-8419-eb684a8b87a6",
+                            ConcurrencyStamp = "d8543e3b-83b9-459a-871b-58b888cd3a14",
                             Course_id = -2,
                             Email = "def@hotmail.com",
                             EmailConfirmed = false,
@@ -372,7 +375,7 @@ namespace LexiconLMS.Server.Data.Migrations
                             Name = "DEF",
                             Password = "def",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "8a28de34-ebe7-4b7c-8c51-71d7e476b0d4",
+                            SecurityStamp = "5d1548f6-6b4f-475a-bceb-2db16b4756bc",
                             TwoFactorEnabled = false,
                             UserName = "def"
                         });

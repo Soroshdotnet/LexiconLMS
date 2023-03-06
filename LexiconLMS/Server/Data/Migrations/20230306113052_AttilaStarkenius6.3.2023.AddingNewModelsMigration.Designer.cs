@@ -4,6 +4,7 @@ using LexiconLMS.Server.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LexiconLMS.Server.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230306113052_AttilaStarkenius6.3.2023.AddingNewModelsMigration")]
+    partial class AttilaStarkenius632023AddingNewModelsMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -163,7 +166,100 @@ namespace LexiconLMS.Server.Data.Migrations
                     b.ToTable("PersistedGrants", (string)null);
                 });
 
-            modelBuilder.Entity("LexiconLMS.Server.Models.Activity", b =>
+            modelBuilder.Entity("LexiconLMS.Server.Models.ApplicationUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "-1",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "cb70fcd4-72bd-4449-af03-d1e58b5293ca",
+                            Email = "abc@hotmail.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "76cd49bd-008c-40ad-ba03-f2979a201bb3",
+                            TwoFactorEnabled = false,
+                            UserName = "abc"
+                        },
+                        new
+                        {
+                            Id = "-2",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "0b7d2577-6ebe-4b39-838f-c29aa12de3a5",
+                            Email = "def@hotmail.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "6201c586-e6e9-4df1-b43f-bc76e1629c9b",
+                            TwoFactorEnabled = false,
+                            UserName = "def"
+                        });
+                });
+
+            modelBuilder.Entity("LexiconLMS.Shared.Activity", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -238,7 +334,7 @@ namespace LexiconLMS.Server.Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("LexiconLMS.Server.Models.Activity_type", b =>
+            modelBuilder.Entity("LexiconLMS.Shared.Activity_type", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -267,118 +363,7 @@ namespace LexiconLMS.Server.Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("LexiconLMS.Server.Models.ApplicationUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Course_id")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("UserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedEmail")
-                        .HasDatabaseName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasDatabaseName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.ToTable("AspNetUsers", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "-1",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "bf16bc8b-3441-44e7-a153-c5976881a12d",
-                            Course_id = -1,
-                            Email = "abc@hotmail.com",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            Name = "ABC",
-                            Password = "abc",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "109c4d1b-d037-4050-a766-3220e5e3c0fd",
-                            TwoFactorEnabled = false,
-                            UserName = "abc"
-                        },
-                        new
-                        {
-                            Id = "-2",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "c5894681-baac-4eaa-8419-eb684a8b87a6",
-                            Course_id = -2,
-                            Email = "def@hotmail.com",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            Name = "DEF",
-                            Password = "def",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "8a28de34-ebe7-4b7c-8c51-71d7e476b0d4",
-                            TwoFactorEnabled = false,
-                            UserName = "def"
-                        });
-                });
-
-            modelBuilder.Entity("LexiconLMS.Server.Models.Course", b =>
+            modelBuilder.Entity("LexiconLMS.Shared.Course", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -413,7 +398,7 @@ namespace LexiconLMS.Server.Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("LexiconLMS.Server.Models.Document", b =>
+            modelBuilder.Entity("LexiconLMS.Shared.Document", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -457,7 +442,7 @@ namespace LexiconLMS.Server.Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("LexiconLMS.Server.Models.Module", b =>
+            modelBuilder.Entity("LexiconLMS.Shared.Module", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -504,6 +489,52 @@ namespace LexiconLMS.Server.Data.Migrations
                             Duration = new TimeSpan(1, 0, 0, 0, 0),
                             Name = "Azure",
                             StartTime = new DateTime(2023, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
+                });
+
+            modelBuilder.Entity("LexiconLMS.Shared.User", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+
+                    b.Property<int>("Course_id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("User");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = -1,
+                            Course_id = -1,
+                            Email = "abcd@hotmail.com",
+                            Name = "abcd",
+                            Password = "abcd@hotmail.com"
+                        },
+                        new
+                        {
+                            ID = -2,
+                            Course_id = -2,
+                            Email = "efgh@hotmail.com",
+                            Name = "efgh",
+                            Password = "efgh@hotmail.com"
                         });
                 });
 

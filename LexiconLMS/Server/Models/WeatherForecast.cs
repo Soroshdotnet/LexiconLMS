@@ -1,4 +1,4 @@
-namespace LexiconLMS.Shared
+namespace LexiconLMS.Server.Models
 {
     public class WeatherForecast
     {
