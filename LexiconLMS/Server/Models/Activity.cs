@@ -20,7 +20,7 @@ namespace LexiconLMS.Shared
         public Module Module { get; set; }
         public int ModuleId { get; set; }
 
-        public ActivityType Activity_type { get; set; }
+        public ActivityType ActivityType { get; set; }
         public int ActivityTypeId { get; set; }
     }
 }

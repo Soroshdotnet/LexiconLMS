@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace LexiconLMS.Shared
 {
+#nullable disable
     public class Course
     {
-#nullable disable
 
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;

@@ -14,27 +14,5 @@ namespace LexiconLMS.Server.Data
             IOptions<OperationalStoreOptions> operationalStoreOptions) : base(options, operationalStoreOptions)
         {
         }
-
-        //**  LÅT STÅ **// 
-        //public DbSet<LexiconLMS.Shared.User> Users { get; set; } = default!;
-        //public DbSet<LexiconLMS.Shared.Module> Modules { get; set; } = default!;
-
-        //public DbSet<LexiconLMS.Shared.Course> Courses { get; set; } = default!;
-
-        //public DbSet<LexiconLMS.Shared.Activity> Activitys { get; set; } = default!;
-
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-
-        //    base.OnModelCreating(modelBuilder);
-
-        //    modelBuilder
-        //        .Entity<Document>()
-        //        .HasOne(d => d.Module)
-        //        .WithMany(a => a.Activitys )
-        //        .HasForeignKey(m => m.module)
-        //        .OnDelete(DeleteBehavior.NoAction);
-
-        //}
     }
 }
