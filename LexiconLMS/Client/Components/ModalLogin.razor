@@ -1,0 +1,53 @@
+﻿@using LexiconLMS.Client.Pages
+
+
+<div class="modal @ModalClass">
+     tabindex="-1"
+     role="dialog"
+     style="display:@ModalDisplay">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <iframe src="/Identity/Account/Login" style="border:none; width: 520px; height: 520px;"></iframe>
+
+            <button @onclick="OnRerenderParent" @onclick:preventDefault="true" id="addItemBtn" class="btn btn-info">Close after login</button>
+
+        </div>
+    </div>
+</div>
+
+
+@if (ShowBackdrop)
+{
+    <div class="modal-backdrop fade show"></div>
+}
+
+
+@code {
+
+
+    public Guid Guid = Guid.NewGuid();
+    public string ModalDisplay = "block;";
+    public string ModalClass = "";
+    public bool ShowBackdrop = true;
+
+    public void Open()
+    {
+        ModalDisplay = "block;";
+        ModalClass = "Show";
+        ShowBackdrop = true;
+        StateHasChanged();
+
+    }
+
+    [Parameter]
+    public EventCallback RerenderParent { get; set; }
+
+    public async void OnRerenderParent()
+    {
+        ModalDisplay = "none";
+        ModalClass = "";
+        ShowBackdrop = false;
+        await RerenderParent.InvokeAsync();
+    }
+
+}
