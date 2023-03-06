@@ -1,6 +1,15 @@
-﻿<div id="courseList">
+﻿@using LexiconLMS.Client.Models;
+@using LexiconLMS.Client.Services;
+
+
+
+<div id="courseList">
     <b>Courses</b>
     <ul>
+        @*@foreach (var course in courseList)
+        {
+            <li @onclick="() => doSomething()">@course.Name</li>
+        }*@
         <li @onclick="() => doSomething()">UX Designer</li>
         <li @onclick="() => doSomething()">Front End</li>
         <li @onclick="() => doSomething()">Back End</li>
@@ -11,6 +20,9 @@
 </div>
 
 @code {
+
+    //[Parameter]
+    //public List<Course> courseList { get; set; } = new List<Course>();
 
     private void doSomething()
     {

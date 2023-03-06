@@ -13,5 +13,9 @@ namespace LexiconLMS.Server.Data
             IOptions<OperationalStoreOptions> operationalStoreOptions) : base(options, operationalStoreOptions)
         {
         }
+        public DbSet<Course> Course { get; set; } = default!;
+        public DbSet<CourseModule> CourseModule { get; set; } = default!;
+        public DbSet<CourseModuleActivity> CourseModuleActivity { get; set; } = default!;
+
     }
 }
