@@ -8,6 +8,10 @@ using Microsoft.EntityFrameworkCore;
 using static System.Formats.Asn1.AsnWriter;
 using LexiconLMS.Server.MyModels;
 using Microsoft.Extensions.DependencyInjection;
+using LexiconLMS.Client;
+using Microsoft.AspNetCore.Components.Web;
+using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
+using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
 namespace LexiconLMS.Server
 {
@@ -28,10 +32,10 @@ namespace LexiconLMS.Server
 
             // Make sure we have the database
             serviceProvider.GetService<ApplicationDbContext>().Database.EnsureCreated();
-        
 
-        builder.Services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(connectionString));
+
+            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+                    options.UseSqlServer(connectionString));
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
             builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
@@ -95,9 +99,7 @@ namespace LexiconLMS.Server
             app.MapFallbackToFile("index.html");
 
             app.Run();
-
-            //await builder.Build().RunAsync();
-
+            return Task.CompletedTask;
         }
     }
 }
