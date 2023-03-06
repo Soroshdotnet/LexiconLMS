@@ -31,10 +31,10 @@ namespace LexiconLMS.Server.Data
 
 
             modelBuilder.Entity<Activity>().HasData(
-                 new Activity { ID = -1, Desc = "abc", Activity_TypeID = -1, Module_id = -1, Name = "ABC" },
-                   new Activity { ID = -2, Desc = "def", Activity_TypeID = -2, Module_id = -2, Name = "DEF" },
-                   new Activity { ID = -3, Desc = "ghi", Activity_TypeID = -3, Module_id = -3, Name = "GHI" },
-                   new Activity { ID = -4, Desc = "jkl", Activity_TypeID = -4, Module_id = -4, Name = "JKL" }
+                 new Activity { /*ID = -1, Desc = "abc", Activity_TypeID = -1, Module_id = -1, */Name = "ABC" },
+                   new Activity { /*ID = -2, Desc = "def", Activity_TypeID = -2, Module_id = -2, */Name = "DEF" },
+                   new Activity { /*ID = -3, Desc = "ghi", Activity_TypeID = -3, Module_id = -3,*/ Name = "GHI" },
+                   new Activity { /*ID = -4, Desc = "jkl", Activity_TypeID = -4, Module_id = -4, */Name = "JKL" }
                 );
 
             modelBuilder.Entity<Activity_type>().HasData(
@@ -44,42 +44,42 @@ namespace LexiconLMS.Server.Data
 
             modelBuilder.Entity<ApplicationUser>().HasData(
 new ApplicationUser { Id = "-1", UserName = "abc", Email = "abc@hotmail.com"
-, Name = "ABC", /*Password = "abc", */Course_id = -1},
+/*, Name = "ABC", *//*Password = "abc", *//*Course_id = -1*/},
 new ApplicationUser { Id = "-2", UserName = "def", Email = "def@hotmail.com"
-,
-    Name = "DEF",
+//,
+    //Name = "DEF",
     //Password = "def",
-    Course_id = -2
+    //Course_id = -2
 }
 );
 
             modelBuilder.Entity<Course>().HasData(
-new Course { ID = -1, Desc = "-1", Name = "Programming .NET" },
-new Course { ID = -2, Desc = "-2", Name = "Programming Frontend" }
+new Course { /*ID = -1, */Desc = "-1", Name = "Programming .NET" },
+new Course { /*ID = -2, */Desc = "-2", Name = "Programming Frontend" }
 );
 
             modelBuilder.Entity<Document>().HasData(
-new Document { ID = -1, Module_id = -1, Lesson_id = -1, Course_id = -1, Name = "E-learning" },
-new Document { ID = -2, Module_id = -1, Lesson_id = -1, Course_id = -1, Name = "Slideshow" }
+new Document { Id = -10/* ID = -1, Module_id = -1, Lesson_id = -1, Course_id = -1, Name = "E-learning"*/ },
+new Document { Id = -11/*ID = -2, Module_id = -1, Lesson_id = -1, Course_id = -1, Name = "Slideshow"*/ }
 );
 
             modelBuilder.Entity<Module>().HasData(
 new Module
 {
-    ID = -1,
+    //ID = -1,
     Name = "C#",
     Desc = "abc",
-    Course_id = -1,
+    //Course_id = -1,
     StartTime = DateTime.ParseExact("01/12/2022", "dd/MM/yyyy",
 CultureInfo.InvariantCulture/*null*/),
     Duration = TimeSpan.FromHours(100)
 },
 new Module
 {
-    ID = -2,
+    //ID = -2,
     Name = "Azure",
     Desc = "def",
-    Course_id = -2,
+    //Course_id = -2,
     StartTime = DateTime.ParseExact("15/01/2023", "dd/MM/yyyy",
 CultureInfo.InvariantCulture/*null*/),
     Duration = TimeSpan.FromHours(24)

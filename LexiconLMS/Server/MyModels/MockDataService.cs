@@ -24,18 +24,18 @@ namespace LexiconLMS.Server.MyModels
             var e1 = new ApplicationUser
             {
                 Id = "-20",
-                Name = "Kalle Anka",
-                Email = "kalleanka@hotmail.com",
-                Course_id = -20
+                //Name = "Kalle Anka",
+                Email = "kalleanka@hotmail.com"
+                //Course_id = -20
 
             };
 
             var e2 = new ApplicationUser
             {
                 Id = "-20",
-                Name = "abcdefg",
-                Email = "abcdefg@hotmail.com",
-                Course_id = -21
+                //Name = "abcdefg",
+                Email = "abcdefg@hotmail.com"
+                //Course_id = -21
             };
 
 
