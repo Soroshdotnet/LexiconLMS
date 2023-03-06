@@ -53,7 +53,7 @@ namespace LexiconLMS
 
             //await app.SeedDataAsync();
 
-            MockDataService.ApplicationUsers();
+            //MockDataService.ApplicationUsers();
 
 
             // Configure the HTTP request pipeline.
