@@ -1,5 +1,4 @@
-﻿using LexiconLMS.Shared;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 
 namespace LexiconLMS.Server.Models
 {
