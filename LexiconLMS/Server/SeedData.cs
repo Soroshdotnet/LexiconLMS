@@ -86,15 +86,15 @@ namespace LexiconLMS.Server
             }
         }
 
-        private static IEnumerable<User> GetUsers(int nrOfUsers)
+        private static IEnumerable<ApplicationUser> GetUsers(int nrOfUsers)
         {
             var faker = new Faker("sv");
 
-            var users = new List<User>();
+            var users = new List<ApplicationUser>();
 
             for (int i = 0; i < nrOfUsers; i++)
             {
-                var temp = new User
+                var temp = new ApplicationUser
                 {
                     Name = faker.Company.CatchPhrase(),
                     Email = faker.Hacker.Verb(),
