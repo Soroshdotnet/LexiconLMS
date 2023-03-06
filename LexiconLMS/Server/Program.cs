@@ -15,7 +15,7 @@ namespace LexiconLMS.Server
         /*public static void Main*/
         /* async Task */
         /*public static void*/
-        public static async Task Main(string[] args, IServiceProvider serviceProvider)
+        public static async Task Main(string[] args/*, IServiceProvider serviceProvider*/)
         {
             //IServiceProvider serviceProvider = new();
             var builder = WebApplication.CreateBuilder(args);
@@ -25,8 +25,8 @@ namespace LexiconLMS.Server
 
             //builder.Services.AddAutoMapper(typeof(Program));
 
-            // Make sure we have the database
-            serviceProvider.GetService<ApplicationDbContext>().Database.EnsureCreated();
+            //// Make sure we have the database
+            //serviceProvider.GetService<ApplicationDbContext>().Database.EnsureCreated();
         
 
         builder.Services.AddDbContext<ApplicationDbContext>(options =>
