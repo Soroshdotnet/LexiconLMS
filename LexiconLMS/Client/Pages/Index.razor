@@ -44,3 +44,14 @@
 
 }
 
+<SurveyPrompt Title="How is Blazor working for you?" />
+
+<AuthorizeView Roles="Teacher">
+  <h1>This can only teachers see</h1>
+    
+</AuthorizeView>
+
+<AuthorizeView Roles="Student">
+  <h1>This can only students see</h1>
+    
+</AuthorizeView>
