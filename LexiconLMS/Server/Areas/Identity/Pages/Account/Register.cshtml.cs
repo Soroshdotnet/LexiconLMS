@@ -124,7 +124,7 @@ namespace LexiconLMS.Server.Areas.Identity.Pages.Account
 
                 if (result.Succeeded)
                 {
-                    var res = await _userManager.AddToRoleAsync(user, Input.Role);
+                    var res = await _userManager.AddToRoleAsync(user, Input.Role); //<------------------------------------
                     _logger.LogInformation("User created a new account with password.");
 
                     var userId = await _userManager.GetUserIdAsync(user);

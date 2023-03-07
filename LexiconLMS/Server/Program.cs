@@ -21,10 +21,11 @@ namespace LexiconLMS
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
             builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
-                .AddRoles<IdentityRole>()
+                .AddRoles<IdentityRole>() //<-----
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             builder.Services.AddIdentityServer()
+            //***********************************************************************//
                 .AddApiAuthorization<ApplicationUser, ApplicationDbContext>(options =>
                 {
                     options.IdentityResources["openid"].UserClaims.Add("role");
@@ -32,7 +33,7 @@ namespace LexiconLMS
                 });
 
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Remove("role");
-
+            //***********************************************************************//
             builder.Services.AddAuthentication()
                 .AddIdentityServerJwt();
 
