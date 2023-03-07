@@ -12,10 +12,10 @@
 <div id="teacherLandingPage" class="container">
     <div class="row">
         <div class="col">
-            <CourseList courseList="courses"></CourseList>
+            <CourseList courseList="courses" xGetCourse="selectCourse"></CourseList>
         </div>
         <div class="col">
-            <CourseModulesTeachers></CourseModulesTeachers>
+            <CourseModulesTeachers courseSelected="CourseSelected"></CourseModulesTeachers>
         </div>
     </div>
 </div>
@@ -25,31 +25,29 @@
 
     private IEnumerable<CourseDto> courses = new List<CourseDto>();
 
+    public CourseDto? CourseSelected { get; set; } 
+
     [Inject]
     public ICourseClient CourseClient { get; set; } = default!;
 
-
-
-
     protected override async Task OnInitializedAsync()
     {
-        //httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", await GetTokenAsync())
-
         var res = await CourseClient.GetAsync();
         courses = res;
-        //if (res is not null)
-        //  courses = res.ToList();
-    }
-    private async Task<string> GetTokenAsync()
+    }   
+
+    public void selectCourse(CourseDto course)
     {
-        //var authState = await authenticationStateProvider.GetAuthenticationStateAsync();
-        //var user = authState.User;
-
-        //if (user.identity.isauthenticated)
-        //{
-        //    return await accessTokenProvider.RequestAccessToken();
-        //}
-
-        return string.Empty;
+        CourseSelected = course;
+        Console.WriteLine("selectedCourse" + course.Name);
     }
+
+    private string courseSelected()
+    {
+        return "2";
+    }
+
+    
+
+
 }

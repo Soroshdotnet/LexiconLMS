@@ -8,7 +8,7 @@
     <ul>
         @foreach (var course in courseList)
         {
-        <li @onclick="() => doSomething()">@course.Name</li>
+            <li @onclick="async () => await GetCourse(course)" @onclick:stopPropagation="true">@course.Name</li>
         }
         
     </ul>
@@ -22,7 +22,19 @@
 
     private void doSomething()
     {
+
         Console.WriteLine("From courseList");
     }
 
+    [Parameter]
+    public EventCallback<CourseDto> xGetCourse { get; set; }
+
+
+    public async Task GetCourse(CourseDto course)
+    {
+        Console.WriteLine("From courseList GetCourse");
+
+        await xGetCourse.InvokeAsync(course);
+    }
+    
 }

@@ -1,15 +1,14 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using System.Reflection;
 
 namespace LexiconLMS.Client.Models
 {
 
-    public class CourseDto
+    public class ActivityDto
     {
 
         public string Name { get; set; }
         public string Desc { get; set; }
-        public ICollection<ModuleDto> Modules { get; set; }
-
-
+        
     }
 }
