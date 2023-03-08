@@ -57,22 +57,9 @@ namespace LexiconLMS.Server
             //builder.MyModels.MockDataService();
             var app = builder.Build();
 
-            //await app;
+            await app.SeedDataAsync();
 
-            //var scope = app.ApplicationServices.CreateScope();
-            //var serviceProvider = scope.ServiceProvider;
-            //var db = serviceProvider.GetRequiredService<ApplicationDbContext>();
-
-            ////db.Database.EnsureDeleted();
-            ////db.Database.Migrate();
-
-            ////dotnet user-secrets set "AdminPW" "BytMig123!"
-            //var config = serviceProvider.GetRequiredService<IConfiguration>();
-            //var adminPW = config["AdminPW"];
-
-            //await app.SeedDataAsync();
-
-            //MockDataService.ApplicationUsers();
+            
 
 
             // Configure the HTTP request pipeline.

@@ -16,13 +16,14 @@ namespace LexiconLMS.Server
         private static ApplicationDbContext db = default!;
         private static RoleManager<IdentityRole> roleManager = default!;
         private static UserManager<ApplicationUser> userManager = default!;
-        public static async Task InitAsync(ApplicationDbContext context, IServiceProvider services, string adminPW)
+        private static string adminPW;
+
+        public static async Task InitAsync(ApplicationDbContext context, IServiceProvider services)
         {
             ArgumentNullException.ThrowIfNull(nameof(context));
             db = context;
             if (db.Users.Any()) return;
             ArgumentNullException.ThrowIfNull(nameof(services));
-            //ArgumentNullException.ThrowIfNull(adminPW, nameof(adminPW));
 
             roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
             ArgumentNullException.ThrowIfNull(roleManager);
@@ -30,50 +31,34 @@ namespace LexiconLMS.Server
             userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
             ArgumentNullException.ThrowIfNull(userManager);
 
-            var roleNames = new[] { "Member", "Admin" };
-            var adminEmail = "admin@gym.se";
+            //--------------
+            adminPW = "BytMig123!";
+            //--------------
 
-            var users = GetUsers(20);
-            await db.AddRangeAsync(users);
+            var roleNames = new[] { "Teacher", "Student" };
+            var teacherEmail = "teacher@lms.se";
 
-            await AddRolesAsync(roleNames);
 
-            var admin = await AddAdminAsync(adminEmail, adminPW);
+            await CreateRoles(roleNames);
 
-            await AddToRolesAsync(admin, roleNames);
+            var courses = GetCourses(5);
+            db.AddRange(courses);
+
+            var modules = GetModules(50, courses);
+            db.AddRange(modules);
+
+            var activities = GetActivites(300, modules);
+            db.AddRange(activities);
+
+            await CreateStudents(100, roleNames[1], courses);
+
+            var teacher = await AddTeacherAsync(teacherEmail, adminPW);
+            await AddToRoleAsync(teacher, roleNames[0]);
+
+            await db.SaveChangesAsync();
         }
 
-        private static async Task AddToRolesAsync(ApplicationUser admin, string[] roleNames)
-        {
-            foreach (var role in roleNames)
-            {
-                if (await userManager.IsInRoleAsync(admin, role)) continue;
-                var result = await userManager.AddToRoleAsync(admin, role);
-                if (!result.Succeeded) throw new Exception(string.Join("\n", result.Errors));
-            }
-        }
-
-        private static async Task<ApplicationUser> AddAdminAsync(string adminEmail, string adminPW)
-        {
-            var found = await userManager.FindByEmailAsync(adminEmail);
-
-            if (found != null) return null!;
-
-            var admin = new ApplicationUser
-            {
-                UserName = adminEmail,
-                Email = adminEmail,
-                //FirstName = "Admin",
-                //TimeOfRegistration = DateTime.Now
-            };
-
-            var result = await userManager.CreateAsync(admin, adminPW);
-            if (!result.Succeeded) throw new Exception(string.Join("\n", result.Errors));
-
-            return admin;
-        }
-
-        private static async Task AddRolesAsync(string[] roleNames)
+        private static async Task CreateRoles(string[] roleNames)
         {
             foreach (var roleName in roleNames)
             {
@@ -85,7 +70,7 @@ namespace LexiconLMS.Server
             }
         }
 
-        private static IEnumerable<ApplicationUser> GetUsers(int nrOfUsers)
+        private static async Task CreateStudents(int nrOfUsers, string role, IEnumerable<Course> courses)
         {
             var faker = new Faker("sv");
 
@@ -93,19 +78,47 @@ namespace LexiconLMS.Server
 
             for (int i = 0; i < nrOfUsers; i++)
             {
+                var email = faker.Internet.Email();
                 var temp = new ApplicationUser
                 {
-                    //Name = faker.Company.CatchPhrase(),
-                    Email = faker.Hacker.Verb(),
-                    PasswordHash = faker.Random.ToString()
-                    //Duration = new TimeSpan(0, 55, 0),
-                    //StartTime = DateTime.Now.AddDays(faker.Random.Int(-5, 5))
+                    Email = email,
+                    UserName = email,
+                    Course = faker.PickRandom(courses)
+
                 };
 
-                users.Add(temp);
+                var res = await userManager.CreateAsync(temp, adminPW);
+                if (!res.Succeeded) throw new Exception(string.Join("\n", res.Errors));
+
+                await AddToRoleAsync(temp, role);
+
             }
 
-            return users;
+
+        }
+
+        private static async Task AddToRoleAsync(ApplicationUser teacher, string roleName)
+        {
+                var result = await userManager.AddToRoleAsync(teacher, roleName);
+                if (!result.Succeeded) throw new Exception(string.Join("\n", result.Errors));
+        }
+
+        private static async Task<ApplicationUser> AddTeacherAsync(string teacherEmail, string adminPW)
+        {
+            var found = await userManager.FindByEmailAsync(teacherEmail);
+
+            if (found != null) return null!;
+
+            var teacher = new ApplicationUser
+            {
+                UserName = teacherEmail,
+                Email = teacherEmail,
+            };
+
+            var result = await userManager.CreateAsync(teacher, adminPW);
+            if (!result.Succeeded) throw new Exception(string.Join("\n", result.Errors));
+
+            return teacher;
         }
 
         private static IEnumerable<Course> GetCourses(int nrOfCourses)
@@ -121,15 +134,44 @@ namespace LexiconLMS.Server
             return faker.Generate(nrOfCourses);
         }
 
-        private static IEnumerable<Module> GetModules(int nrOfModules)
+        private static IEnumerable<Module> GetModules(int nrOfModules, IEnumerable<Course> courses)
         {
             var faker = new Faker<Module>("sv")
                 .RuleFor(g => g.Name, f => f.Company.CatchPhrase())
                 .RuleFor(g => g.Desc, f => f.Hacker.Verb())
                 .RuleFor(g => g.Duration, new TimeSpan(0, 55, 0))
-                .RuleFor(g => g.StartTime, f => DateTime.Now.AddDays(f.Random.Int(-5, 5)));
+                .RuleFor(g => g.StartTime, f => DateTime.Now.AddDays(f.Random.Int(-5, 5)))
+                .RuleFor(g => g.Course, f => f.PickRandom(courses));
 
             return faker.Generate(nrOfModules);
+        }  
+        
+        private static IEnumerable<Activity> GetActivites(int nrOfActivites, IEnumerable<Module> modules)
+        {
+            var activityTypes = new[] { "E-L", "Assignment", "Lecture" };
+            List<ActivityType> activities = new List<ActivityType>();
+
+            for (int i = 0; i < activityTypes.Length; i++)
+            {
+                var temp = new ActivityType
+                {
+                    Type = activityTypes[i],
+                };
+                activities.Add(temp);
+            }
+
+            db.AddRange(activities);
+
+
+            var faker = new Faker<Activity>("sv")
+                .RuleFor(g => g.Name, f => f.Company.CatchPhrase())
+                .RuleFor(g => g.Desc, f => f.Hacker.Verb())
+                .RuleFor(g => g.Duration, new TimeSpan(0, 55, 0))
+                .RuleFor(g => g.StartTime, f => DateTime.Now.AddDays(f.Random.Int(-5, 5)))
+                .RuleFor(g => g.Module, f => f.PickRandom(modules))
+                .RuleFor(g => g.ActivityType, f => f.PickRandom(activities));
+
+            return faker.Generate(nrOfActivites);
         }
     }
 }
