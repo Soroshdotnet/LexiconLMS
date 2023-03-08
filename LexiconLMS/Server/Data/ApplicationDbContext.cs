@@ -17,74 +17,74 @@ namespace LexiconLMS.Server.Data
         {
         }
         public DbSet<Activity> Activities => Set<Activity>();
-        public DbSet<Activity_type> Activity_Types => Set<Activity_type>();
+        public DbSet<ActivityType> ActivityTypes => Set<ActivityType>();
         public DbSet<Course> Courses => Set<Course>();
         public DbSet<Document> Documents => Set<Document>();
         public DbSet<Module> Modules => Set<Module>();
         //public DbSet<User> User => Set<User>();
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
+//        protected override void OnModelCreating(ModelBuilder modelBuilder)
+//        {
+//            base.OnModelCreating(modelBuilder);
 
-            //modelBuilder.Seed();
+//            //modelBuilder.Seed();
 
 
-            modelBuilder.Entity<Activity>().HasData(
-                 new Activity { Id = -11,/*ID = -1, Desc = "abc", Activity_TypeID = -1, Module_id = -1, */Name = "ABC" },
-                   new Activity { Id = -12,/*ID = -2, Desc = "def", Activity_TypeID = -2, Module_id = -2, */Name = "DEF" },
-                   new Activity { Id = -13,/*ID = -3, Desc = "ghi", Activity_TypeID = -3, Module_id = -3,*/ Name = "GHI" },
-                   new Activity { Id = -14,/*ID = -4, Desc = "jkl", Activity_TypeID = -4, Module_id = -4, */Name = "JKL" }
-                );
+//            modelBuilder.Entity<Activity>().HasData(
+//                 new Activity { Id = -11,/*ID = -1, Desc = "abc", ActivityTypeID = -1, Module_id = -1, */Name = "ABC" },
+//                   new Activity { Id = -12,/*ID = -2, Desc = "def", ActivityTypeID = -2, Module_id = -2, */Name = "DEF" },
+//                   new Activity { Id = -13,/*ID = -3, Desc = "ghi", ActivityTypeID = -3, Module_id = -3,*/ Name = "GHI" },
+//                   new Activity { Id = -14,/*ID = -4, Desc = "jkl", ActivityTypeID = -4, Module_id = -4, */Name = "JKL" }
+//                );
 
-            modelBuilder.Entity<Activity_type>().HasData(
-     new Activity_type { ID = -1, Type = "Lesson" },
-       new Activity_type { ID = -2, Type = "Test" }
-    );
+//            modelBuilder.Entity<ActivityType>().HasData(
+//     new ActivityType { ID = -1, Type = "Lesson" },
+//       new ActivityType { ID = -2, Type = "Test" }
+//    );
 
-            modelBuilder.Entity<ApplicationUser>().HasData(
-new ApplicationUser { Id = "-1", UserName = "abc", Email = "abc@hotmail.com"
-/*, Name = "ABC", *//*Password = "abc", *//*Course_id = -1*/},
-new ApplicationUser { Id = "-2", UserName = "def", Email = "def@hotmail.com"
-//,
-    //Name = "DEF",
-    //Password = "def",
-    //Course_id = -2
-}
-);
+//            modelBuilder.Entity<ApplicationUser>().HasData(
+//new ApplicationUser { Id = "-1", UserName = "abc", Email = "abc@hotmail.com"
+///*, Name = "ABC", *//*Password = "abc", *//*Course_id = -1*/},
+//new ApplicationUser { Id = "-2", UserName = "def", Email = "def@hotmail.com"
+////,
+//    //Name = "DEF",
+//    //Password = "def",
+//    //Course_id = -2
+//}
+//);
 
-            modelBuilder.Entity<Course>().HasData(
-new Course { Id = -12,/*ID = -1, */Desc = "-1", Name = "Programming .NET" },
-new Course { Id = -13,/*ID = -2, */Desc = "-2", Name = "Programming Frontend" }
-);
+//            modelBuilder.Entity<Course>().HasData(
+//new Course { Id = -12,/*ID = -1, */Desc = "-1", Name = "Programming .NET" },
+//new Course { Id = -13,/*ID = -2, */Desc = "-2", Name = "Programming Frontend" }
+//);
 
-            modelBuilder.Entity<Document>().HasData(
-new Document { Id = -10/* ID = -1, Module_id = -1, Lesson_id = -1, Course_id = -1, Name = "E-learning"*/ },
-new Document { Id = -11/*ID = -2, Module_id = -1, Lesson_id = -1, Course_id = -1, Name = "Slideshow"*/ }
-);
+//            modelBuilder.Entity<Document>().HasData(
+//new Document { Id = -10/* ID = -1, Module_id = -1, Lesson_id = -1, Course_id = -1, Name = "E-learning"*/ },
+//new Document { Id = -11/*ID = -2, Module_id = -1, Lesson_id = -1, Course_id = -1, Name = "Slideshow"*/ }
+//);
 
-            modelBuilder.Entity<Module>().HasData(
-new Module
-{
-    Id = -14,//ID = -1,
-    Name = "C#",
-    Desc = "abc",
-    //Course_id = -1,
-    StartTime = DateTime.ParseExact("01/12/2022", "dd/MM/yyyy",
-CultureInfo.InvariantCulture/*null*/),
-    Duration = TimeSpan.FromHours(100)
-},
-new Module
-{
-    Id = -15,//ID = -2,
-    Name = "Azure",
-    Desc = "def",
-    //Course_id = -2,
-    StartTime = DateTime.ParseExact("15/01/2023", "dd/MM/yyyy",
-CultureInfo.InvariantCulture/*null*/),
-    Duration = TimeSpan.FromHours(24)
-}
-);
+//            modelBuilder.Entity<Module>().HasData(
+//new Module
+//{
+//    Id = -14,//ID = -1,
+//    Name = "C#",
+//    Desc = "abc",
+//    //Course_id = -1,
+//    StartTime = DateTime.ParseExact("01/12/2022", "dd/MM/yyyy",
+//CultureInfo.InvariantCulture/*null*/),
+//    Duration = TimeSpan.FromHours(100)
+//},
+//new Module
+//{
+//    Id = -15,//ID = -2,
+//    Name = "Azure",
+//    Desc = "def",
+//    //Course_id = -2,
+//    StartTime = DateTime.ParseExact("15/01/2023", "dd/MM/yyyy",
+//CultureInfo.InvariantCulture/*null*/),
+//    Duration = TimeSpan.FromHours(24)
+//}
+//);
 
 //            modelBuilder.Entity<User>().HasData(
 //new User
@@ -121,7 +121,7 @@ CultureInfo.InvariantCulture/*null*/),
         //public DbSet<Course> Courses;
         //public DbSet<Module> Modules;
         //public DbSet<Activity> Activities;
-        //public DbSet<Activity_type> Activity_types;
+        //public DbSet<ActivityType> ActivityTypes;
 
 
 
@@ -144,4 +144,3 @@ CultureInfo.InvariantCulture/*null*/),
         //}
 
     }
-}
