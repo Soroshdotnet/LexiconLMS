@@ -1,6 +1,6 @@
 ﻿using LexiconLMS.Server.Models;
 
-namespace LexiconLMS.Server.Services
+namespace LexiconLMS.Server.Repositories
 {
     public interface IModulesRepository
     {

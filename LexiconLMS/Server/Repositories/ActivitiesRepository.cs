@@ -2,7 +2,7 @@
 using LexiconLMS.Server.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace LexiconLMS.Server.Services
+namespace LexiconLMS.Server.Repositories
 {
     public class ActivitiesRepository : IActivitiesRepository
     {

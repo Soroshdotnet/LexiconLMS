@@ -1,7 +1,8 @@
 ﻿using LexiconLMS.Server.Controllers;
 using LexiconLMS.Server.Data;
 
-namespace LexiconLMS.Server.Services
+
+namespace LexiconLMS.Server.Repositories
 {
     public class UnitOfWork : IUnitOfWork
     {
@@ -13,7 +14,7 @@ namespace LexiconLMS.Server.Services
 
         public UnitOfWork(ApplicationDbContext applicationDbContext)
         {
-            this.db = applicationDbContext;
+            db = applicationDbContext;
             coursesRepository = new CoursesRepository(db);
             activitiesRepository = new ActivitiesRepository(db);
             documentsRepository = new DocumentsRepository(db);

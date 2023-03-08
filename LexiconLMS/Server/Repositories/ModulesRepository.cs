@@ -1,7 +1,7 @@
 ﻿using LexiconLMS.Server.Data;
 using LexiconLMS.Server.Models;
 
-namespace LexiconLMS.Server.Services
+namespace LexiconLMS.Server.Repositories
 {
     public class ModulesRepository : IModulesRepository
     {
