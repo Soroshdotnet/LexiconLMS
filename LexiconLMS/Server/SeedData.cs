@@ -16,7 +16,7 @@ namespace LexiconLMS.Server
         private static ApplicationDbContext db = default!;
         private static RoleManager<IdentityRole> roleManager = default!;
         private static UserManager<ApplicationUser> userManager = default!;
-        private static string adminPW;
+        private static string? adminPW;
 
         public static async Task InitAsync(ApplicationDbContext context, IServiceProvider services)
         {

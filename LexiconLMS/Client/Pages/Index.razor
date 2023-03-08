@@ -9,17 +9,22 @@
 
 <AuthorizeView>
     <Authorized>
+
         <LoginDisplay />
-        <p><a href="/StudentLandingPage">Student</a></p>
-        <p><a href="/TeacherLandingPage">Teacher</a></p>
-        
-        
     </Authorized>
     <NotAuthorized>
         <ModalLogin RerenderParent="RerenderParent"></ModalLogin>
         
     </NotAuthorized>
 </AuthorizeView>
+
+<AuthorizeView Roles="Teacher">
+          <TeacherLandingPage />
+        </AuthorizeView>
+
+        <AuthorizeView Roles="Student">
+          <StudentLandingPage />
+        </AuthorizeView>
 
 
 @code {
@@ -44,14 +49,6 @@
 
 }
 
-<SurveyPrompt Title="How is Blazor working for you?" />
 
-<AuthorizeView Roles="Teacher">
-  <h1>This can only teachers see</h1>
-    
-</AuthorizeView>
 
-<AuthorizeView Roles="Student">
-  <h1>This can only students see</h1>
-    
-</AuthorizeView>
+
