@@ -1,4 +1,5 @@
 using LexiconLMS.Server.Data;
+using LexiconLMS.Server.Extensions;
 using LexiconLMS.Server.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
@@ -6,11 +7,11 @@ using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
 using System.IdentityModel.Tokens.Jwt;
 
-namespace LexiconLMS
+namespace LexiconLMS.Server
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
@@ -41,6 +42,8 @@ namespace LexiconLMS
             builder.Services.AddRazorPages();
 
             var app = builder.Build();
+
+            await app.SeedDataAsync();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())

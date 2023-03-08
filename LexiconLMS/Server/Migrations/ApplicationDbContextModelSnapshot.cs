@@ -265,7 +265,7 @@ namespace LexiconLMS.Server.Migrations
 
                     b.HasIndex("ModuleId");
 
-                    b.ToTable("Activity");
+                    b.ToTable("Activities");
                 });
 
             modelBuilder.Entity("LexiconLMS.Shared.ActivityType", b =>
@@ -281,7 +281,7 @@ namespace LexiconLMS.Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ActivityType");
+                    b.ToTable("ActivityTypes");
                 });
 
             modelBuilder.Entity("LexiconLMS.Shared.Course", b =>
@@ -300,7 +300,7 @@ namespace LexiconLMS.Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Course");
+                    b.ToTable("Courses");
                 });
 
             modelBuilder.Entity("LexiconLMS.Shared.Document", b =>
@@ -333,7 +333,7 @@ namespace LexiconLMS.Server.Migrations
 
                     b.HasIndex("ModuleId");
 
-                    b.ToTable("Document");
+                    b.ToTable("Documents");
                 });
 
             modelBuilder.Entity("LexiconLMS.Shared.Module", b =>
@@ -363,7 +363,7 @@ namespace LexiconLMS.Server.Migrations
 
                     b.HasIndex("CourseId");
 
-                    b.ToTable("Module");
+                    b.ToTable("Modules");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
