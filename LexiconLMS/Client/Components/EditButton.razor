@@ -1,0 +1,21 @@
+<div @onclick="()=>DoEdit()" @onclick:preventDefault="true" class="editbutton" style="top: @Top; left: @Left; ">Edit</div>
+
+@code {
+    [Parameter]
+    public string Top { get; set; } = "0px";
+
+    [Parameter]
+    public string Left { get; set; } = "0px";
+
+
+    [Parameter]
+    public EventCallback StartEditing { get; set; }
+
+    public async void DoEdit()
+    {
+        Console.WriteLine("Do Edit");
+        await StartEditing.InvokeAsync();
+    }
+
+
+}

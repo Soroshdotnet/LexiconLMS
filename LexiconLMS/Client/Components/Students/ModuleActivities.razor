@@ -1,0 +1,19 @@
+<div id="moduleActivites">
+    <b>Aktiviteter</b>
+    <ul>
+        <li @onclick="() => doSomething()">Introduktion</li>
+        <li @onclick="() => doSomething()">E-learningkurs 1</li>
+        <li @onclick="() => doSomething()">Föreläsning 1</li>
+        <li @onclick="() => doSomething()">Workshop</li>
+        <li @onclick="() => doSomething()">Eget arbete</li>
+    </ul>
+</div>
+
+@code {
+
+    private void doSomething()
+    {
+        Console.WriteLine("From activities");
+    }
+
+}

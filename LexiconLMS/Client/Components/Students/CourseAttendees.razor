@@ -1,0 +1,19 @@
+<div id="courseAttendees">
+    <b>Attendees</b>
+    <ul>
+        <li @onclick="() => doSomething()">Atilla</li>
+        <li @onclick="() => doSomething()">Aisha</li>
+        <li @onclick="() => doSomething()">Sorosh</li>
+        <li @onclick="() => doSomething()">Dennis</li>
+        <li @onclick="() => doSomething()">Johan</li>
+    </ul>
+</div>
+
+@code {
+
+    private void doSomething()
+    {
+        Console.WriteLine("From Attendees");
+    }
+
+}
