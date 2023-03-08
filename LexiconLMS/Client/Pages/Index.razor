@@ -1,9 +1,57 @@
 ﻿@page "/"
+@using LexiconLMS.Client.Components
+@using LexiconLMS.Client.Pages
+@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@inject IJSRuntime JavaScript
 
-<PageTitle>Index</PageTitle>
 
-<h1>Hello, world!</h1>
 
-Welcome to your new app.
+<AuthorizeView>
+    <Authorized>
+        <LoginDisplay />
+        <p><a href="/StudentLandingPage">Student</a></p>
+        <p><a href="/TeacherLandingPage">Teacher</a></p>
+        
+        
+    </Authorized>
+    <NotAuthorized>
+        <ModalLogin RerenderParent="RerenderParent"></ModalLogin>
+        
+    </NotAuthorized>
+</AuthorizeView>
+
+
+@code {
+
+    
+
+
+
+     
+    private async void RerenderParent()
+    {
+
+        //calls javascript.js to reload when logged in
+        await JavaScript.InvokeVoidAsync("reloadParent", "reloadParent");
+        
+    }
+
+    
+
+    
+
+
+}
 
 <SurveyPrompt Title="How is Blazor working for you?" />
+
+<AuthorizeView Roles="Teacher">
+  <h1>This can only teachers see</h1>
+    
+</AuthorizeView>
+
+<AuthorizeView Roles="Student">
+  <h1>This can only students see</h1>
+    
+</AuthorizeView>

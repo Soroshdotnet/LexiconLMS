@@ -163,6 +163,57 @@ namespace LexiconLMS.Server.Migrations
                     b.ToTable("PersistedGrants", (string)null);
                 });
 
+            modelBuilder.Entity("LexiconLMS.Server.Models.Activity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ActivityTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Desc")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<TimeSpan>("Duration")
+                        .HasColumnType("time");
+
+                    b.Property<int>("ModuleId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("StartTime")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ActivityTypeId");
+
+                    b.HasIndex("ModuleId");
+
+                    b.ToTable("Activities");
+                });
+
+            modelBuilder.Entity("LexiconLMS.Server.Models.ActivityType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Type")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ActivityTypes");
+                });
+
             modelBuilder.Entity("LexiconLMS.Server.Models.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
@@ -233,58 +284,7 @@ namespace LexiconLMS.Server.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("LexiconLMS.Shared.Activity", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("ActivityTypeId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Desc")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<TimeSpan>("Duration")
-                        .HasColumnType("time");
-
-                    b.Property<int>("ModuleId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("StartTime")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ActivityTypeId");
-
-                    b.HasIndex("ModuleId");
-
-                    b.ToTable("Activity");
-                });
-
-            modelBuilder.Entity("LexiconLMS.Shared.ActivityType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Type")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ActivityType");
-                });
-
-            modelBuilder.Entity("LexiconLMS.Shared.Course", b =>
+            modelBuilder.Entity("LexiconLMS.Server.Models.Course", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -300,10 +300,10 @@ namespace LexiconLMS.Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Course");
+                    b.ToTable("Courses");
                 });
 
-            modelBuilder.Entity("LexiconLMS.Shared.Document", b =>
+            modelBuilder.Entity("LexiconLMS.Server.Models.Document", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -333,10 +333,10 @@ namespace LexiconLMS.Server.Migrations
 
                     b.HasIndex("ModuleId");
 
-                    b.ToTable("Document");
+                    b.ToTable("Documents");
                 });
 
-            modelBuilder.Entity("LexiconLMS.Shared.Module", b =>
+            modelBuilder.Entity("LexiconLMS.Server.Models.Module", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -363,7 +363,7 @@ namespace LexiconLMS.Server.Migrations
 
                     b.HasIndex("CourseId");
 
-                    b.ToTable("Module");
+                    b.ToTable("Modules");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -503,24 +503,15 @@ namespace LexiconLMS.Server.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("LexiconLMS.Server.Models.ApplicationUser", b =>
+            modelBuilder.Entity("LexiconLMS.Server.Models.Activity", b =>
                 {
-                    b.HasOne("LexiconLMS.Shared.Course", "Course")
-                        .WithMany("Users")
-                        .HasForeignKey("CourseId");
-
-                    b.Navigation("Course");
-                });
-
-            modelBuilder.Entity("LexiconLMS.Shared.Activity", b =>
-                {
-                    b.HasOne("LexiconLMS.Shared.ActivityType", "ActivityType")
+                    b.HasOne("LexiconLMS.Server.Models.ActivityType", "ActivityType")
                         .WithMany("Activitys")
                         .HasForeignKey("ActivityTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("LexiconLMS.Shared.Module", "Module")
+                    b.HasOne("LexiconLMS.Server.Models.Module", "Module")
                         .WithMany("Activitys")
                         .HasForeignKey("ModuleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -531,9 +522,18 @@ namespace LexiconLMS.Server.Migrations
                     b.Navigation("Module");
                 });
 
-            modelBuilder.Entity("LexiconLMS.Shared.Document", b =>
+            modelBuilder.Entity("LexiconLMS.Server.Models.ApplicationUser", b =>
                 {
-                    b.HasOne("LexiconLMS.Shared.Activity", "Activity")
+                    b.HasOne("LexiconLMS.Server.Models.Course", "Course")
+                        .WithMany("Users")
+                        .HasForeignKey("CourseId");
+
+                    b.Navigation("Course");
+                });
+
+            modelBuilder.Entity("LexiconLMS.Server.Models.Document", b =>
+                {
+                    b.HasOne("LexiconLMS.Server.Models.Activity", "Activity")
                         .WithMany()
                         .HasForeignKey("ActivityId");
 
@@ -541,11 +541,11 @@ namespace LexiconLMS.Server.Migrations
                         .WithMany()
                         .HasForeignKey("ApplictionUserId");
 
-                    b.HasOne("LexiconLMS.Shared.Course", "Course")
+                    b.HasOne("LexiconLMS.Server.Models.Course", "Course")
                         .WithMany("Documents")
                         .HasForeignKey("CourseId");
 
-                    b.HasOne("LexiconLMS.Shared.Module", "Module")
+                    b.HasOne("LexiconLMS.Server.Models.Module", "Module")
                         .WithMany("Documents")
                         .HasForeignKey("ModuleId");
 
@@ -558,9 +558,9 @@ namespace LexiconLMS.Server.Migrations
                     b.Navigation("Module");
                 });
 
-            modelBuilder.Entity("LexiconLMS.Shared.Module", b =>
+            modelBuilder.Entity("LexiconLMS.Server.Models.Module", b =>
                 {
-                    b.HasOne("LexiconLMS.Shared.Course", "Course")
+                    b.HasOne("LexiconLMS.Server.Models.Course", "Course")
                         .WithMany("Modules")
                         .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -620,12 +620,12 @@ namespace LexiconLMS.Server.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("LexiconLMS.Shared.ActivityType", b =>
+            modelBuilder.Entity("LexiconLMS.Server.Models.ActivityType", b =>
                 {
                     b.Navigation("Activitys");
                 });
 
-            modelBuilder.Entity("LexiconLMS.Shared.Course", b =>
+            modelBuilder.Entity("LexiconLMS.Server.Models.Course", b =>
                 {
                     b.Navigation("Documents");
 
@@ -634,7 +634,7 @@ namespace LexiconLMS.Server.Migrations
                     b.Navigation("Users");
                 });
 
-            modelBuilder.Entity("LexiconLMS.Shared.Module", b =>
+            modelBuilder.Entity("LexiconLMS.Server.Models.Module", b =>
                 {
                     b.Navigation("Activitys");
 

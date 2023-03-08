@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LexiconLMS.Shared
+namespace LexiconLMS.Server.Models
 {
     public class Module
     {
@@ -13,7 +13,7 @@ namespace LexiconLMS.Shared
         public string Name { get; set; }
         public string Desc { get; set; }
         public DateTime StartTime { get; set; }
-        public TimeSpan Duration { get; set; }  
+        public TimeSpan Duration { get; set; }
 
 
         public Course Course { get; set; }

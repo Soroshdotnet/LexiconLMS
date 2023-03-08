@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
+﻿using AutoMapper;
+using LexiconLMS.Server.Models;
+using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LexiconLMS.Server.Controllers
@@ -7,10 +10,16 @@ namespace LexiconLMS.Server.Controllers
     {
         private readonly ILogger<OidcConfigurationController> _logger;
 
-        public OidcConfigurationController(IClientRequestParametersProvider clientRequestParametersProvider, ILogger<OidcConfigurationController> logger)
+        //private readonly IMapper _mapper;
+        //private readonly UserManager<ApplicationUser> _applicationUserManager;
+
+        public OidcConfigurationController(IClientRequestParametersProvider clientRequestParametersProvider, ILogger<OidcConfigurationController> logger
+            /*IMapper mapper, *//*UserManager<ApplicationUser> applicationUserManager*/)
         {
             ClientRequestParametersProvider = clientRequestParametersProvider;
             _logger = logger;
+            //_mapper = mapper;
+            //_applicationUserManager = applicationUserManager;
         }
 
         public IClientRequestParametersProvider ClientRequestParametersProvider { get; }

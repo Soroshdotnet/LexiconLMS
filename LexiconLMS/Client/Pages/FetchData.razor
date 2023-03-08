@@ -2,6 +2,7 @@
 @using Microsoft.AspNetCore.Authorization
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
 @using LexiconLMS.Shared
+@using System.Security.Claims;
 @attribute [Authorize]
 @inject HttpClient Http
 
@@ -38,13 +39,33 @@ else
             }
         </tbody>
     </table>
+
+    <AuthorizeView>
+        @if (context.User.IsInRole("Teacher"))
+        {
+            <h2>@context.User.Identity.Name is a Teacher</h2>
+        }
+        <h2>@user.Identity.Name</h2>
+        <ul>
+            @foreach(var c in context.User.Claims)
+            {
+                <li>Claimtype: @c.Type, Value: @c.Value</li>
+            }
+        </ul>
+    </AuthorizeView>
 }
 
 @code {
+    private ClaimsPrincipal user;
+
     private WeatherForecast[]? forecasts;
+
+    [CascadingParameter]
+    public Task<AuthenticationState> authenState { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
+        user = (await authenState).User;
         try
         {
             forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("WeatherForecast");
