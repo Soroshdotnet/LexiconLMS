@@ -11,7 +11,7 @@
         {
             <h1>Kurs: @courseSelected.Name</h1>
         
-    <p>Kursbeskrivning</p>
+    <p>Kursbeskrivning:</p>
     <p>@courseSelected.Desc</p>
 
     <EditButton Top="-50px" Left="-4px"></EditButton>
@@ -21,38 +21,8 @@
             }
             else
             {
-                <div class="accordion" id="accordionPanelsStayOpenExample">
-                @foreach (var module in courseSelected.Modules)
-                {
-                    
-                        <div class="accordion-item">
-
-                            <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
-                                    @module.Name
-                                </button>
-                            </h2>
-                            <EditButton Top="-48px" Left="0px"></EditButton>
-                            <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
-                                <div class="accordion-body">
-
-
-                                    @foreach (var activity in module.Activitys)
-                                    {
-                                        <p>@activity.Name</p>
-                                    }
-
-
-                                </div>
-                            </div>
-                        </div>
-                }
-                </div>
+                <ModuleActivitiesTeachers courseSelectedModules="@courseSelected.Modules" />
             }
-
-    
-
-
         }
     }
 

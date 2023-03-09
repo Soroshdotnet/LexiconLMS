@@ -1,5 +1,38 @@
+@using LexiconLMS.Client.Models;
+
+
+
 <div id="moduleActivites">
-    <b>Aktiviteter</b>
+    <p><b>Aktiviteter:</b></p>
+
+
+
+    <div class="accordion" id="accordionPanelsStayOpenExample">
+        @foreach (var module in courseSelectedModules)
+        {
+
+            <div class="accordion-item">
+
+                <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                        @module.Name
+                    </button>
+                </h2>
+                <EditButton Top="-48px" Left="0px"></EditButton>
+                <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+                    <div class="accordion-body">
+
+                        <ActivityTeachers courseSelectedModulesActivities="@module.Activitys" />
+
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+
+
+
     <ul>
         <li @onclick="() => doSomething()"><EditButton Left="-5px" Top="-2px" StartEditing="doSomething2" />Introduktion</li>
         <li @onclick="() => doSomething()"><EditButton Left="-5px" Top="-2px" StartEditing="doSomething2" />E-learningkurs 1</li>
@@ -10,6 +43,9 @@
 </div>
 
 @code {
+
+    [Parameter]
+    public IEnumerable<ModuleDto> courseSelectedModules { get; set; } = new List<ModuleDto>();
 
     private void doSomething()
     {

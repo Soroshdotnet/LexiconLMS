@@ -1,0 +1,16 @@
+﻿@using LexiconLMS.Client.Models;
+<h3>ActivityTeachers</h3>
+
+
+@foreach (var activity in courseSelectedModulesActivities)
+{
+                                <p>@activity.Name</p>
+}
+
+@code {
+
+    [Parameter]
+    public IEnumerable<ActivityDto> courseSelectedModulesActivities { get; set; } = new List<ActivityDto>();
+
+
+}
