@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using LexiconLMS.Server.Data;
 using LexiconLMS.Server.Models;
-using LexiconLMS.Client.Models;
+
 using LexiconLMS.Server.Repositories;
 
 namespace LexiconLMS.Server.Controllers

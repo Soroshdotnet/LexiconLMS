@@ -1,5 +1,5 @@
-﻿using LexiconLMS.Client.Models;
-using LexiconLMS.Server.Models;
+﻿using LexiconLMS.Server.Models;
+using LexiconLMS.Shared.DTOs;
 
 namespace LexiconLMS.Server.Repositories
 {

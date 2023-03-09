@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 
-namespace LexiconLMS.Client.Models
+namespace LexiconLMS.Shared.DTOs
 {
 
     public class CourseDto

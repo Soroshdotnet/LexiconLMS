@@ -1,6 +1,7 @@
-﻿using LexiconLMS.Client.Models;
+﻿
 using LexiconLMS.Server.Data;
 using LexiconLMS.Server.Models;
+using LexiconLMS.Shared.DTOs;
 using Microsoft.EntityFrameworkCore;
 
 namespace LexiconLMS.Server.Repositories

@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 
-namespace LexiconLMS.Client.Models
+namespace LexiconLMS.Shared.DTOs
 {
 #nullable disable
     public class ModuleDto

@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
-namespace LexiconLMS.Client.Models
+namespace LexiconLMS.Shared.DTOs
 {
 
     public class ActivityDto
@@ -9,6 +9,6 @@ namespace LexiconLMS.Client.Models
 
         public string Name { get; set; }
         public string Desc { get; set; }
-        
+
     }
 }

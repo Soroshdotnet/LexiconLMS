@@ -1,5 +1,4 @@
-﻿using LexiconLMS.Client.Models;
-
+﻿using LexiconLMS.Shared.DTOs;
 
 namespace LexiconLMS.Client.Services
 {

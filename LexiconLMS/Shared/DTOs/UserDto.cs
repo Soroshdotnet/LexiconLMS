@@ -1,14 +1,14 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
-namespace LexiconLMS.Client.Models
+namespace LexiconLMS.Shared.DTOs
 {
 
     public class UserDto
     {
 
         public string UserName { get; set; }
-        
-        
+
+
     }
 }

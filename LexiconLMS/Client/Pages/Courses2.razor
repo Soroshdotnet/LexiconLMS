@@ -1,8 +1,9 @@
 ﻿@page "/Courses2"
-@using LexiconLMS.Client.Models;
+@using LexiconLMS.Shared.DTOs
 @using Microsoft.AspNetCore.Authorization
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
-@using LexiconLMS.Shared
+@using LexiconLMS.Shared;
+    
 
 @attribute [Authorize( Roles ="Student")]
 @inject HttpClient Http

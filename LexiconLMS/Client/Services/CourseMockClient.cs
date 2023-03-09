@@ -1,5 +1,5 @@
 ﻿using Bogus.DataSets;
-using LexiconLMS.Client.Models;
+using LexiconLMS.Shared.DTOs;
 using System.Reflection;
 
 namespace LexiconLMS.Client.Services
