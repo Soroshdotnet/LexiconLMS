@@ -8,7 +8,7 @@
             <CourseAttendees Students="students"></CourseAttendees>
         </div>
         <div class="col-9">
-            <CourseModules></CourseModules>
+            <CourseModules courseSelected="course"></CourseModules>
         </div>
     </div>
 </div>
@@ -27,6 +27,7 @@
         var res = await CourseClient.GetAsync("nothing yet...");
         if (res is not null)
             students = res.Users.ToList();
+            course = res!;
     }
     
 }
