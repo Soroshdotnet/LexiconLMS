@@ -38,7 +38,7 @@ namespace LexiconLMS.Server
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             //1. Register UnitOFWork
-            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+         //   builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             builder.Services.AddIdentityServer()
             //***********************************************************************//

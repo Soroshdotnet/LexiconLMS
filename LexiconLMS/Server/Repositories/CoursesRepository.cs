@@ -1,4 +1,5 @@
-﻿using LexiconLMS.Server.Data;
+﻿using LexiconLMS.Client.Models;
+using LexiconLMS.Server.Data;
 using LexiconLMS.Server.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,6 +12,11 @@ namespace LexiconLMS.Server.Repositories
         public CoursesRepository(ApplicationDbContext db)
         {
             this.db = db;
+        }
+
+        public async Task<IEnumerable<CourseDto>> GetAsync()
+        { 
+
         }
 
 

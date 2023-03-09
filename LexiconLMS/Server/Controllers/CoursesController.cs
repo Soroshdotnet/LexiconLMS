@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using LexiconLMS.Server.Data;
 using LexiconLMS.Server.Models;
+using LexiconLMS.Client.Models;
 
 namespace LexiconLMS.Server.Controllers
 {
@@ -25,11 +26,23 @@ namespace LexiconLMS.Server.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Course>>> GetCourses()
         {
-          if (_context.Courses == null)
-          {
-              return NotFound();
-          }
-            return await _context.Courses.ToListAsync();
+            var courseDtos = _context.Courses.Select(c => new CourseDto
+            {
+                Desc = c.Desc,
+                Name = c.Name,
+                Modules = c.Modules.Select(m => new ModuleDto
+                {
+                    Name = m.Name,
+                    Desc = m.Desc,
+                    Activitys = m.Activitys.Select(a => new ActivityDto
+                    {
+                        Name = a.Name,
+                        Desc = a.Desc
+                    })
+                })
+            });
+
+            return Ok(await courseDtos.ToListAsync());
         }
 
         // GET: api/Courses/5
