@@ -9,6 +9,7 @@ namespace LexiconLMS.Client.Models
         public string Name { get; set; }
         public string Desc { get; set; }
         public ICollection<ModuleDto> Modules { get; set; }
+        public ICollection<UserDto> Users { get; set; }
 
 
     }

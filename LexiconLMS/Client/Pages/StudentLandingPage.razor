@@ -1,9 +1,11 @@
 ﻿@page "/StudentLandingPage"
 @using LexiconLMS.Client.Components.Students
+@using LexiconLMS.Client.Models;
+@using LexiconLMS.Client.Services;
 <div id="studentLandingPage" class="container">
     <div class="row justify-content-center gx-5">
         <div class="col-3" style="align-content: end">
-            <CourseAttendees></CourseAttendees>
+            <CourseAttendees Students="students"></CourseAttendees>
         </div>
         <div class="col-9">
             <CourseModules></CourseModules>
@@ -12,5 +14,19 @@
 </div>
 
 @code {
+
+    private IEnumerable<UserDto> students = new List<UserDto>();
+
+    [Inject]
+    public ICourseClient CourseClient { get; set; } = default!;
+
+    public CourseDto course { get; set; } 
+
+    protected override async Task OnInitializedAsync()
+    {
+        var res = await CourseClient.GetAsync("nothing yet...");
+        if (res is not null)
+            students = res.Users.ToList();
+    }
     
 }

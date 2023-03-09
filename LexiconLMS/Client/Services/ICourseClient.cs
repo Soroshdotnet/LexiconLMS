@@ -5,7 +5,7 @@ namespace LexiconLMS.Client.Services
 {
     public interface ICourseClient
     {
-
+        Task<CourseDto> GetAsync(string id);        
         Task<IEnumerable<CourseDto>?> GetAsync();
 
         /*

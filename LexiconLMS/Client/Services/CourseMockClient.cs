@@ -12,6 +12,13 @@ namespace LexiconLMS.Client.Services
         {
             this.httpClient = httpClient;
         }
+
+        public async Task<CourseDto> GetAsync(string id)
+        {
+            var res = (await GetAsync()).FirstOrDefault();
+            return res;
+        }
+
         public async Task<IEnumerable<CourseDto>?> GetAsync()
         {
             return new List<CourseDto>()
@@ -20,6 +27,29 @@ namespace LexiconLMS.Client.Services
                 {
                     Name = "Mjölk",
                     Desc = "beskrivning",
+                    Users = new List<UserDto>() { 
+                        new UserDto()
+                        {
+                            UserName= "username 1",
+                        },
+                        new UserDto()
+                        {
+                            UserName= "username 2",
+                        },
+                        new UserDto()
+                        {
+                            UserName= "username 3",
+                        },
+                        new UserDto()
+                        {
+                            UserName= "username 4",
+                        },
+                        new UserDto()
+                        {
+                            UserName= "username 5",
+                        },
+                    },
+
                     Modules = new List<ModuleDto>() {
 
                         new ModuleDto()

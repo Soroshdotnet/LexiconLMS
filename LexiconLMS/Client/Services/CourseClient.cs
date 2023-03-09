@@ -15,6 +15,12 @@ namespace LexiconLMS.Client.Services
 
         }
 
+        public async Task<CourseDto> GetAsync(string id)
+        {
+            var res = new CourseDto { Name =""};
+            return res;
+        }
+
         public async Task<IEnumerable<CourseDto>?> GetAsync()
         {
             var res = await httpClient.GetFromJsonAsync<IEnumerable<CourseDto>>("api/courses");
