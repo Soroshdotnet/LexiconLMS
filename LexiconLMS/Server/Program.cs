@@ -20,7 +20,7 @@ namespace LexiconLMS.Server
         /*public static void Main*/
         /* async Task */
         /*public static void*/
-        public static void/* async Task */Main(string[] args/*, IServiceProvider serviceProvider*/)
+        public static async void/* async Task */Main(string[] args/*, IServiceProvider serviceProvider*/)
         {
             //IServiceProvider serviceProvider = new();
             var builder = WebApplication.CreateBuilder(args);
@@ -52,6 +52,7 @@ namespace LexiconLMS.Server
             //builder.MyModels.MockDataService();
             var app = builder.Build();
 
+            await app.SeedDataAsync();
             //await app;
 
             //var scope = app.ApplicationServices.CreateScope();

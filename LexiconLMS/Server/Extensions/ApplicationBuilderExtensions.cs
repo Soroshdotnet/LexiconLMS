@@ -16,14 +16,14 @@ namespace LexiconLMS.Server.Extensions
                 //db.Database.Migrate();
 
                 //dotnet user-secrets set "AdminPW" "BytMig123!"
-                var config = serviceProvider.GetRequiredService<IConfiguration>();
-                var adminPW = config["AdminPW"];
+                //var config = serviceProvider.GetRequiredService<IConfiguration>();
+                //var adminPW = config["AdminPW"];
 
                 //ArgumentNullException.ThrowIfNull(adminPW, nameof(adminPW));
 
                 try
                 {
-                    await SeedData.InitAsync(db, serviceProvider, adminPW);
+                    await SeedData.InitAsync(db, serviceProvider/*, adminPW*/);
                 }
                 catch (Exception e)
                 {
