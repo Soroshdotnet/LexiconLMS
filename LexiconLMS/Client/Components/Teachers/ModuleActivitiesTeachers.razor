@@ -4,18 +4,26 @@
     <p><b>Moduler:</b></p>
 
     <div class="accordion" id="accordionPanelsStayOpenExample">
+
+        @{
+            var i = 0;
+        }
+        
         @foreach (var module in courseSelectedModules)
         {
+            i++;
+
+            var h2Id = "panelsStayOpen-heading" + i;
 
             <div class="accordion-item">
 
-                <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                <h2 class="accordion-header" id="panelsStayOpen-heading@(i)">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse@(i)" aria-expanded="false" aria-controls="panelsStayOpen-collapse@(i)">
                         @module.Name
                     </button>
                 </h2>
                 <EditButton Top="-48px" Left="0px"></EditButton>
-                <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+                <div id="panelsStayOpen-collapse@(i)" class="accordion-collapse collapse @(i==1 ? "show" : "")" aria-labelledby="panelsStayOpen-headingOne">
                     <div class="accordion-body">
 
                         <ActivityTeachers courseSelectedModulesActivities="@module.Activitys" />
