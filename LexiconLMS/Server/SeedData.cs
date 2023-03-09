@@ -17,7 +17,7 @@ namespace LexiconLMS.Server
         private static ApplicationDbContext db = default!;
         private static RoleManager<IdentityRole> roleManager = default!;
         private static UserManager<ApplicationUser> userManager = default!;
-        private static string adminPW;
+        private static string? adminPW;
 
         public static async Task InitAsync(ApplicationDbContext context, IServiceProvider services)
         {
@@ -88,7 +88,7 @@ namespace LexiconLMS.Server
 
                 };
 
-                var res = await userManager.CreateAsync(temp, adminPW);
+                var res = await userManager.CreateAsync(temp, adminPW!);
                 if (!res.Succeeded) throw new Exception(string.Join("\n", res.Errors));
 
                 await AddToRoleAsync(temp, role);

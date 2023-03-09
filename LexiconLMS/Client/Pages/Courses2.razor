@@ -1,4 +1,4 @@
-﻿@page "/Courses"
+﻿@page "/Courses2"
 @using Microsoft.AspNetCore.Authorization
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
 @using LexiconLMS.Shared
@@ -9,28 +9,12 @@
 
 <h3>Courses page</h3>
 
-@if (CoursesDTO == null)
-{
-    <p>No Courses Items found.</p>
-}
-else
-{
-    <ul>
-        @foreach (var item in CoursesDTO)
-        {
-            <li>@CoursesDTO.Name</li>
-        }
-    </ul>
-}
-
-
-
 <p>Course name: @CoursesDTO.Name
 
     </p>
 
 @code {
     
-    public CoursesDTO CoursesDTO = new CoursesDTO();
+    private CoursesDTO CoursesDTO = new CoursesDTO();
 
 }
