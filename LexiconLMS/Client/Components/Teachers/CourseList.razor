@@ -1,0 +1,40 @@
+@using LexiconLMS.Client.Models;
+@using LexiconLMS.Client.Services;
+
+
+
+<div id="courseList">
+    <b>Kurser OBS! Dessa kommer ifrån mock</b>
+    <ul>
+        @foreach (var course in courseList)
+        {
+            <li @onclick="async () => await GetCourse(course)" @onclick:stopPropagation="true">@course.Name</li>
+        }
+        
+    </ul>
+    <button>Create New</button>
+</div>
+
+@code {
+
+    [Parameter]
+    public IEnumerable<CourseDto> courseList { get; set; } = new List<CourseDto>();
+
+    private void doSomething()
+    {
+
+        Console.WriteLine("From courseList");
+    }
+
+    [Parameter]
+    public EventCallback<CourseDto> xGetCourse { get; set; }
+
+
+    public async Task GetCourse(CourseDto course)
+    {
+        Console.WriteLine("From courseList GetCourse");
+
+        await xGetCourse.InvokeAsync(course);
+    }
+    
+}

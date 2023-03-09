@@ -6,18 +6,29 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
 using System.IdentityModel.Tokens.Jwt;
+using static System.Formats.Asn1.AsnWriter;
+using LexiconLMS.Server.MyModels;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace LexiconLMS.Server
 {
-    public class Program
+    public /*static*/ class Program
     {
         public static async Task Main(string[] args)
         {
+            //IServiceProvider serviceProvider = new();
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+
+            //builder.Services.AddAutoMapper(typeof(Program));
+
+            //// Make sure we have the database
+            //serviceProvider.GetService<ApplicationDbContext>().Database.EnsureCreated();
+        
+
+        builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(connectionString));
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
@@ -40,8 +51,13 @@ namespace LexiconLMS.Server
 
             builder.Services.AddControllersWithViews();
             builder.Services.AddRazorPages();
-
+            //builder.MyModels.MockDataService();
             var app = builder.Build();
+
+            await app.SeedDataAsync();
+
+            
+
 
             await app.SeedDataAsync();
 
@@ -74,6 +90,9 @@ namespace LexiconLMS.Server
             app.MapFallbackToFile("index.html");
 
             app.Run();
+
+            //await builder.Build().RunAsync();
+
         }
     }
 }

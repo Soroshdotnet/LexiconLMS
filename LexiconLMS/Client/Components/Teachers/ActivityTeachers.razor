@@ -1,0 +1,20 @@
+﻿@using LexiconLMS.Client.Models;
+<p><b>Aktivteter</b></p>
+
+
+@foreach (var activity in courseSelectedModulesActivities)
+{
+    <p><EditButton Left="-5px" Top="-2px" StartEditing="doSomething" />@activity.Name</p>
+}
+
+@code {
+
+    [Parameter]
+    public IEnumerable<ActivityDto> courseSelectedModulesActivities { get; set; } = new List<ActivityDto>();
+
+    private void doSomething()
+    {
+        Console.WriteLine("From activities");
+    }
+
+}

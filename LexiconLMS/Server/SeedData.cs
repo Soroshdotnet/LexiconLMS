@@ -8,7 +8,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using LexiconLMS.Shared;
 
 namespace LexiconLMS.Server
 {
@@ -88,7 +87,7 @@ namespace LexiconLMS.Server
 
                 };
 
-                var res = await userManager.CreateAsync(temp, adminPW!);
+                var res = await userManager.CreateAsync(temp, adminPW);
                 if (!res.Succeeded) throw new Exception(string.Join("\n", res.Errors));
 
                 await AddToRoleAsync(temp, role);
@@ -100,8 +99,8 @@ namespace LexiconLMS.Server
 
         private static async Task AddToRoleAsync(ApplicationUser teacher, string roleName)
         {
-            var result = await userManager.AddToRoleAsync(teacher, roleName);
-            if (!result.Succeeded) throw new Exception(string.Join("\n", result.Errors));
+                var result = await userManager.AddToRoleAsync(teacher, roleName);
+                if (!result.Succeeded) throw new Exception(string.Join("\n", result.Errors));
         }
 
         private static async Task<ApplicationUser> AddTeacherAsync(string teacherEmail, string adminPW)
@@ -145,8 +144,8 @@ namespace LexiconLMS.Server
                 .RuleFor(g => g.Course, f => f.PickRandom(courses));
 
             return faker.Generate(nrOfModules);
-        }
-
+        }  
+        
         private static IEnumerable<Activity> GetActivites(int nrOfActivites, IEnumerable<Module> modules)
         {
             var activityTypes = new[] { "E-L", "Assignment", "Lecture" };
