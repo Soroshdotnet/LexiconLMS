@@ -15,9 +15,9 @@ namespace LexiconLMS.Server.Extensions
                 //db.Database.EnsureDeleted();
                 //db.Database.Migrate();
 
-                // dotnet user-secrets set "AdminPW" "BytMig123!"
-                // var config = serviceProvider.GetRequiredService<IConfiguration>();
-                // var adminPW = config["AdminPW"];
+               // dotnet user-secrets set "AdminPW" "BytMig123!"
+               // var config = serviceProvider.GetRequiredService<IConfiguration>();
+               // var adminPW = config["AdminPW"];
 
                 //ArgumentNullException.ThrowIfNull(adminPW, nameof(adminPW));
 
