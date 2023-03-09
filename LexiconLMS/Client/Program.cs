@@ -17,7 +17,7 @@ namespace LexiconLMS.Client
             builder.Services.AddHttpClient("LexiconLMS.ServerAPI", client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress))
                 .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
 
-            builder.Services.AddHttpClient<ICourseClient, CourseMockClient>(client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress))
+            builder.Services.AddHttpClient<ICourseClient, CourseClient>(client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress))
                 .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
 
             // Supply HttpClient instances that include access tokens when making requests to the server project
