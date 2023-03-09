@@ -10,11 +10,12 @@
         else
         {
             <h1>Kurs: @courseSelected.Name</h1>
+            <EditButton Top="-50px" Left="-4px"></EditButton>
         
     <p>Kursbeskrivning:</p>
     <p>@courseSelected.Desc</p>
 
-    <EditButton Top="-50px" Left="-4px"></EditButton>
+    
             if (courseSelected.Modules == null)
             {
                 <p>Finns inga moduler inlagda på denna kurs</p>

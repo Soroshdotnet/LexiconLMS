@@ -1,10 +1,10 @@
 ﻿@using LexiconLMS.Client.Models;
-<h3>ActivityTeachers</h3>
+<p><b>Aktivteter</b></p>
 
 
 @foreach (var activity in courseSelectedModulesActivities)
 {
-                                <p>@activity.Name</p>
+    <p><EditButton Left="-5px" Top="-2px" StartEditing="doSomething" />@activity.Name</p>
 }
 
 @code {
@@ -12,5 +12,9 @@
     [Parameter]
     public IEnumerable<ActivityDto> courseSelectedModulesActivities { get; set; } = new List<ActivityDto>();
 
+    private void doSomething()
+    {
+        Console.WriteLine("From activities");
+    }
 
 }
