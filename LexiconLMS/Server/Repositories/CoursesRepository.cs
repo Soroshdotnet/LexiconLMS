@@ -15,8 +15,24 @@ namespace LexiconLMS.Server.Repositories
         }
 
         public async Task<IEnumerable<CourseDto>> GetAsync()
-        { 
+        {
+            var courseDtos = db.Courses.Select(c => new CourseDto
+            {
+                Desc = c.Desc,
+                Name = c.Name,
+                Modules = c.Modules.Select(m => new ModuleDto
+                {
+                    Name = m.Name,
+                    Desc = m.Desc,
+                    Activitys = m.Activitys.Select(a => new ActivityDto
+                    {
+                        Name = a.Name,
+                        Desc = a.Desc
+                    })
+                })
+            });
 
+            return await courseDtos.ToListAsync();  
         }
 
 

@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using LexiconLMS.Server.Data;
 using LexiconLMS.Server.Models;
 using LexiconLMS.Client.Models;
+using LexiconLMS.Server.Repositories;
 
 namespace LexiconLMS.Server.Controllers
 {
@@ -16,33 +17,19 @@ namespace LexiconLMS.Server.Controllers
     public class CoursesController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        private readonly IUnitOfWork unitOfWork;
 
-        public CoursesController(ApplicationDbContext context)
+        public CoursesController(ApplicationDbContext context, IUnitOfWork unitOfWork)
         {
             _context = context;
+            this.unitOfWork = unitOfWork;
         }
 
         // GET: api/Courses
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Course>>> GetCourses()
         {
-            var courseDtos = _context.Courses.Select(c => new CourseDto
-            {
-                Desc = c.Desc,
-                Name = c.Name,
-                Modules = c.Modules.Select(m => new ModuleDto
-                {
-                    Name = m.Name,
-                    Desc = m.Desc,
-                    Activitys = m.Activitys.Select(a => new ActivityDto
-                    {
-                        Name = a.Name,
-                        Desc = a.Desc
-                    })
-                })
-            });
-
-            return Ok(await courseDtos.ToListAsync());
+            return Ok(await unitOfWork.coursesRepository.GetAsync());
         }
 
         // GET: api/Courses/5
