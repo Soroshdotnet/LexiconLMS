@@ -9,6 +9,7 @@ using System.IdentityModel.Tokens.Jwt;
 using static System.Formats.Asn1.AsnWriter;
 using LexiconLMS.Server.MyModels;
 using Microsoft.Extensions.DependencyInjection;
+using LexiconLMS.Server.Repositories;
 
 namespace LexiconLMS.Server
 {
@@ -36,6 +37,9 @@ namespace LexiconLMS.Server
                 .AddRoles<IdentityRole>() //<-----
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
+            //1. Register UnitOFWork
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
             builder.Services.AddIdentityServer()
             //***********************************************************************//
                 .AddApiAuthorization<ApplicationUser, ApplicationDbContext>(options =>
@@ -59,7 +63,6 @@ namespace LexiconLMS.Server
             
 
 
-            await app.SeedDataAsync();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())

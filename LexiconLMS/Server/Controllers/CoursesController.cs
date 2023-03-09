@@ -10,7 +10,7 @@ using LexiconLMS.Server.Models;
 
 namespace LexiconLMS.Server.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/courses")]
     [ApiController]
     public class CoursesController : ControllerBase
     {
