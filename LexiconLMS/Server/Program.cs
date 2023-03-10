@@ -10,6 +10,7 @@ using static System.Formats.Asn1.AsnWriter;
 using LexiconLMS.Server.MyModels;
 using Microsoft.Extensions.DependencyInjection;
 using LexiconLMS.Server.Repositories;
+using LexiconLMS.Client.Services;
 
 namespace LexiconLMS.Server
 {
@@ -37,8 +38,14 @@ namespace LexiconLMS.Server
                 .AddRoles<IdentityRole>() //<-----
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
+            // Attila Starkenius Register CourseClient
+            builder.Services.AddScoped<ICourseClient, CourseClient>();
+
             //1. Register UnitOFWork
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+            
+            
+
 
             builder.Services.AddIdentityServer()
             //***********************************************************************//

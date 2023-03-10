@@ -1,10 +1,12 @@
 ﻿@using LexiconLMS.Client.Pages
 
 
-<div class="modal @ModalClass"
-     tabindex="-1"
-     role="dialog"
-     style="display:@ModalDisplay">
+<div 
+    class="modal @ModalClass" 
+    tabindex="-1" 
+    role="dialog" 
+    style="display:@ModalDisplay"
+>
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <iframe src="/Identity/Account/Login" style="border:none; width: 520px; height: 520px;"></iframe>
@@ -18,7 +20,7 @@
 
 @if (ShowBackdrop)
 {
-    <div class="modal-backdrop fade show"></div>
+        <div class="modal-backdrop fade show"></div>
 }
 
 

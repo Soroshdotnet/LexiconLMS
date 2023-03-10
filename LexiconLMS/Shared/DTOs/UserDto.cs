@@ -8,7 +8,6 @@ namespace LexiconLMS.Shared.DTOs
     {
 
         public string UserName { get; set; }
-
-
+        public IEnumerable<ModuleDto> Modules { get; set; }
     }
 }

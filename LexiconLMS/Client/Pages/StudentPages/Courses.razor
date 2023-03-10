@@ -1,0 +1,38 @@
+﻿@page "/Courses"
+@using LexiconLMS.Shared.DTOs
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@using LexiconLMS.Shared;
+    
+
+@attribute [Authorize( Roles ="Student")]
+@inject HttpClient Http
+
+
+<h3>Courses page</h3>
+
+@if (CoursesDTO == null)
+{
+    <p>No Courses Items found.</p>
+}
+else
+{
+    <ul>
+        @foreach (var module in CoursesDTO.Modules)
+        {
+            <li>@module.Name</li>
+        }
+    </ul>
+}
+
+
+
+<p>Course name: @CoursesDTO.Name
+
+    </p>
+
+@code {
+    
+    public CourseDto CoursesDTO = new CourseDto();
+
+}

@@ -5,21 +5,24 @@
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
 @inject IJSRuntime JavaScript
 
-
-
 <AuthorizeView>
     <Authorized>
+
         <LoginDisplay />
-        <p><a href="/StudentLandingPage">Student</a></p>
-        <p><a href="/TeacherLandingPage">Teacher</a></p>
-        
-        
     </Authorized>
     <NotAuthorized>
         <ModalLogin RerenderParent="RerenderParent"></ModalLogin>
         
     </NotAuthorized>
 </AuthorizeView>
+
+
+<AuthorizeView Roles="Teacher">
+          <TeacherLandingPage />
+</AuthorizeView>
+<AuthorizeView Roles="Student">
+          <StudentLandingPage />
+ </AuthorizeView>
 
 
 @code {
@@ -43,4 +46,7 @@
 
 
 }
+
+
+
 

@@ -1,0 +1,43 @@
+@using LexiconLMS.Shared.DTOs;
+
+
+<div id="courseModules">
+    @{
+        if (courseSelected == null)
+        {
+            <p>Välj kurs du vill ha information om</p>
+        }
+        else
+        {
+            <h1>Kurs: @courseSelected.Name</h1>
+            <EditButton Top="-50px" Left="-4px"></EditButton>
+        
+    <p>Kursbeskrivning:</p>
+    <p>@courseSelected.Desc</p>
+
+    
+            if (courseSelected.Modules == null)
+            {
+                <p>Finns inga moduler inlagda på denna kurs</p>
+            }
+            else
+            {
+                <ModuleActivitiesTeachers courseSelectedModules="@courseSelected.Modules" />
+            }
+        }
+    }
+
+
+</div>
+
+@code {
+
+    [Parameter]
+    public CourseDto courseSelected { get; set; }
+
+    private void doSomething()
+    {
+        Console.WriteLine("courseSelected: " + courseSelected);
+    }
+
+}

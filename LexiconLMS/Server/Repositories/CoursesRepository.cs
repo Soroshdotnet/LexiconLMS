@@ -1,4 +1,5 @@
 ﻿
+using Bogus.DataSets;
 using LexiconLMS.Server.Data;
 using LexiconLMS.Server.Models;
 using LexiconLMS.Shared.DTOs;
@@ -21,7 +22,11 @@ namespace LexiconLMS.Server.Repositories
             {
                 Desc = c.Desc,
                 Name = c.Name,
-                Modules = c.Modules.Select(m => new ModuleDto
+                Users = c.Users.Select(u => new UserDto
+                {
+                    UserName = u.UserName,
+                    //Desc = m.Desc,
+                    Modules = c.Modules.Select(m => new ModuleDto
                 {
                     Name = m.Name,
                     Desc = m.Desc,
@@ -30,6 +35,7 @@ namespace LexiconLMS.Server.Repositories
                         Name = a.Name,
                         Desc = a.Desc
                     })
+                })
                 })
             });
 

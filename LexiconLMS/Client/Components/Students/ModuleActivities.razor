@@ -1,0 +1,55 @@
+@using LexiconLMS.Shared.DTOs;
+
+<div id="moduleActivites">
+    <p><b>Moduler:</b></p>
+
+    <div class="accordion" id="accordionPanelsStayOpenExample">
+
+        @{
+            var i = 0;
+        }
+        
+        @foreach (var module in courseSelectedModules)
+        {
+            i++;
+
+            var h2Id = "panelsStayOpen-heading" + i;
+
+            <div class="accordion-item">
+
+                <h2 class="accordion-header" id="panelsStayOpen-heading@(i)">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse@(i)" aria-expanded="false" aria-controls="panelsStayOpen-collapse@(i)">
+                        @module.Name
+                    </button>
+                </h2>
+                
+                <div id="panelsStayOpen-collapse@(i)" class="accordion-collapse collapse @(i==1 ? "show" : "")" aria-labelledby="panelsStayOpen-headingOne">
+                    <div class="accordion-body">
+
+                        
+
+                        <Activity courseSelectedModulesActivities="@module.Activitys" />
+
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@code {
+
+    [Parameter]
+    public IEnumerable<ModuleDto> courseSelectedModules { get; set; } = new List<ModuleDto>();
+
+    private void doSomething()
+    {
+        Console.WriteLine("From activities");
+    }
+
+    private async void doSomething2()
+    {
+        Console.WriteLine("From activitites, edit button2");
+    }
+
+}

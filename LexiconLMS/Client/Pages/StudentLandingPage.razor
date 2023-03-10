@@ -1,0 +1,38 @@
+﻿@page "/StudentLandingPage"
+@using LexiconLMS.Client.Components.Students
+@using LexiconLMS.Shared.DTOs;
+@using LexiconLMS.Client.Services;
+<div id="studentLandingPage" class="container">
+    <div class="row justify-content-center gx-5">
+        <div class="col-3" style="align-content: end">
+            <CourseAttendees Students="students"></CourseAttendees>
+        </div>
+        <div class="col-9">
+            <CourseModules courseSelected="course"></CourseModules>
+        </div>
+    </div>
+</div>
+
+@code {
+
+    private IEnumerable<UserDto> students = new List<UserDto>();
+
+    [Inject]
+    public ICourseClient CourseClient { get; set; } = default!;
+
+    public CourseDto course { get; set; }
+
+
+    //ToDo: Hämta elever
+    //ToDo: Välj rätt kurs för inloggad elev
+
+    protected override async Task OnInitializedAsync()
+    {
+        var res = (await CourseClient.GetAsync()).FirstOrDefault();
+
+        if (res is not null)
+            //students = res.Users.ToList();
+        course = res!;
+    }
+
+}

@@ -1,0 +1,29 @@
+@using LexiconLMS.Shared.DTOs;
+<div id="courseAttendees">
+    <b>Attendees</b>
+    <ul>
+        @if (Students.Count() == 0)
+        {
+            <p>No Students added</p>
+        }
+        @foreach (var student in Students)
+        {
+            <li @onclick="() => GetStudent(student.UserName)" @onclick:stopPropagation="true">@student.UserName</li>
+        }
+
+    </ul>
+</div>
+
+@code {
+
+    [Parameter]
+    public IEnumerable<UserDto> Students { get; set; } = new List<UserDto>();
+
+
+
+    private void GetStudent(string studentname)
+    {
+        Console.WriteLine("From Attendees: " + studentname);
+    }
+
+}
