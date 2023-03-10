@@ -9,6 +9,7 @@ using LexiconLMS.Server.Data;
 using LexiconLMS.Server.Models;
 
 using LexiconLMS.Server.Repositories;
+using LexiconLMS.Shared.DTOs;
 
 namespace LexiconLMS.Server.Controllers
 {
@@ -27,7 +28,7 @@ namespace LexiconLMS.Server.Controllers
 
         // GET: api/Courses
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Course>>> GetCourses()
+        public async Task<ActionResult<IEnumerable<CourseDto>>> GetCourses()
         {
             return Ok(await unitOfWork.coursesRepository.GetAsync());
         }
@@ -36,16 +37,37 @@ namespace LexiconLMS.Server.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Course>> GetCourse(int id)
         {
-          if (_context.Courses == null)
-          {
-              return NotFound();
-          }
+            if (_context.Courses == null)
+            {
+                return NotFound();
+            }
             var course = await _context.Courses.FindAsync(id);
+
+            //var partner = await _context.Courses.Include
+            //    (p => p.Modules)./*.Include(p => p.)*/
+            //.FirstOrDefaultAsync(p => p.Modules. == id);
+
+
+            //var modules = await _context.Modules.
+            //    FindAsync(_context.Modules.Where((e => e.CourseId == id)));
+
+            //var activities = await _context.Activities.
+            //    FindAsync(_context.Activities.Where((e => e.ModuleId == id)));
 
             if (course == null)
             {
                 return NotFound();
             }
+
+            //if (modules == null)
+            //{
+            //    return NotFound();
+            //}
+
+            //if (activities == null)
+            //{
+            //    return NotFound();
+            //}
 
             return course;
         }
@@ -86,10 +108,10 @@ namespace LexiconLMS.Server.Controllers
         [HttpPost]
         public async Task<ActionResult<Course>> PostCourse(Course course)
         {
-          if (_context.Courses == null)
-          {
-              return Problem("Entity set 'ApplicationDbContext.Courses'  is null.");
-          }
+            if (_context.Courses == null)
+            {
+                return Problem("Entity set 'ApplicationDbContext.Courses'  is null.");
+            }
             _context.Courses.Add(course);
             await _context.SaveChangesAsync();
 

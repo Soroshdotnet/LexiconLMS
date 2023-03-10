@@ -25,10 +25,10 @@ namespace LexiconLMS.Server.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Document>>> GetDocuments()
         {
-          if (_context.Documents == null)
-          {
-              return NotFound();
-          }
+            if (_context.Documents == null)
+            {
+                return NotFound();
+            }
             return await _context.Documents.ToListAsync();
         }
 
@@ -36,10 +36,10 @@ namespace LexiconLMS.Server.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Document>> GetDocument(int id)
         {
-          if (_context.Documents == null)
-          {
-              return NotFound();
-          }
+            if (_context.Documents == null)
+            {
+                return NotFound();
+            }
             var document = await _context.Documents.FindAsync(id);
 
             if (document == null)
@@ -86,10 +86,10 @@ namespace LexiconLMS.Server.Controllers
         [HttpPost]
         public async Task<ActionResult<Document>> PostDocument(Document document)
         {
-          if (_context.Documents == null)
-          {
-              return Problem("Entity set 'ApplicationDbContext.Documents'  is null.");
-          }
+            if (_context.Documents == null)
+            {
+                return Problem("Entity set 'ApplicationDbContext.Documents'  is null.");
+            }
             _context.Documents.Add(document);
             await _context.SaveChangesAsync();
 

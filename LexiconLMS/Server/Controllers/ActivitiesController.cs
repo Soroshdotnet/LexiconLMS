@@ -25,10 +25,10 @@ namespace LexiconLMS.Server.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Activity>>> GetActivities()
         {
-          if (_context.Activities == null)
-          {
-              return NotFound();
-          }
+            if (_context.Activities == null)
+            {
+                return NotFound();
+            }
             return await _context.Activities.ToListAsync();
         }
 
@@ -36,10 +36,10 @@ namespace LexiconLMS.Server.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Activity>> GetActivity(int id)
         {
-          if (_context.Activities == null)
-          {
-              return NotFound();
-          }
+            if (_context.Activities == null)
+            {
+                return NotFound();
+            }
             var activity = await _context.Activities.FindAsync(id);
 
             if (activity == null)
@@ -86,10 +86,10 @@ namespace LexiconLMS.Server.Controllers
         [HttpPost]
         public async Task<ActionResult<Activity>> PostActivity(Activity activity)
         {
-          if (_context.Activities == null)
-          {
-              return Problem("Entity set 'ApplicationDbContext.Activities'  is null.");
-          }
+            if (_context.Activities == null)
+            {
+                return Problem("Entity set 'ApplicationDbContext.Activities'  is null.");
+            }
             _context.Activities.Add(activity);
             await _context.SaveChangesAsync();
 

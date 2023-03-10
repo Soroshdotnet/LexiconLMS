@@ -6,13 +6,13 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace LexiconLMS.Server.Migrations
 {
     /// <inheritdoc />
-    public partial class AttilaStarkenius832023UpdatingDatabase : Migration
+    public partial class Init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "ActivityTypes",
+                name: "ActivityType",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -21,7 +21,7 @@ namespace LexiconLMS.Server.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ActivityTypes", x => x.Id);
+                    table.PrimaryKey("PK_ActivityType", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -39,7 +39,7 @@ namespace LexiconLMS.Server.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Courses",
+                name: "Course",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -49,7 +49,7 @@ namespace LexiconLMS.Server.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Courses", x => x.Id);
+                    table.PrimaryKey("PK_Course", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -135,7 +135,7 @@ namespace LexiconLMS.Server.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    CourseId = table.Column<int>(type: "int", nullable: true),
+                    CourseId = table.Column<int>(type: "int", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -155,14 +155,15 @@ namespace LexiconLMS.Server.Migrations
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AspNetUsers_Courses_CourseId",
+                        name: "FK_AspNetUsers_Course_CourseId",
                         column: x => x.CourseId,
-                        principalTable: "Courses",
-                        principalColumn: "Id");
+                        principalTable: "Course",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Modules",
+                name: "Module",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -175,11 +176,11 @@ namespace LexiconLMS.Server.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Modules", x => x.Id);
+                    table.PrimaryKey("PK_Module", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Modules_Courses_CourseId",
+                        name: "FK_Module_Course_CourseId",
                         column: x => x.CourseId,
-                        principalTable: "Courses",
+                        principalTable: "Course",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -270,7 +271,7 @@ namespace LexiconLMS.Server.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Activities",
+                name: "Activity",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -284,23 +285,23 @@ namespace LexiconLMS.Server.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Activities", x => x.Id);
+                    table.PrimaryKey("PK_Activity", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Activities_ActivityTypes_ActivityTypeId",
+                        name: "FK_Activity_ActivityType_ActivityTypeId",
                         column: x => x.ActivityTypeId,
-                        principalTable: "ActivityTypes",
+                        principalTable: "ActivityType",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Activities_Modules_ModuleId",
+                        name: "FK_Activity_Module_ModuleId",
                         column: x => x.ModuleId,
-                        principalTable: "Modules",
+                        principalTable: "Module",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Documents",
+                name: "Document",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -312,37 +313,37 @@ namespace LexiconLMS.Server.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Documents", x => x.Id);
+                    table.PrimaryKey("PK_Document", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Documents_Activities_ActivityId",
+                        name: "FK_Document_Activity_ActivityId",
                         column: x => x.ActivityId,
-                        principalTable: "Activities",
+                        principalTable: "Activity",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Documents_AspNetUsers_ApplictionUserId",
+                        name: "FK_Document_AspNetUsers_ApplictionUserId",
                         column: x => x.ApplictionUserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Documents_Courses_CourseId",
+                        name: "FK_Document_Course_CourseId",
                         column: x => x.CourseId,
-                        principalTable: "Courses",
+                        principalTable: "Course",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Documents_Modules_ModuleId",
+                        name: "FK_Document_Module_ModuleId",
                         column: x => x.ModuleId,
-                        principalTable: "Modules",
+                        principalTable: "Module",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Activities_ActivityTypeId",
-                table: "Activities",
+                name: "IX_Activity_ActivityTypeId",
+                table: "Activity",
                 column: "ActivityTypeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Activities_ModuleId",
-                table: "Activities",
+                name: "IX_Activity_ModuleId",
+                table: "Activity",
                 column: "ModuleId");
 
             migrationBuilder.CreateIndex(
@@ -401,23 +402,23 @@ namespace LexiconLMS.Server.Migrations
                 column: "Expiration");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Documents_ActivityId",
-                table: "Documents",
+                name: "IX_Document_ActivityId",
+                table: "Document",
                 column: "ActivityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Documents_ApplictionUserId",
-                table: "Documents",
+                name: "IX_Document_ApplictionUserId",
+                table: "Document",
                 column: "ApplictionUserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Documents_CourseId",
-                table: "Documents",
+                name: "IX_Document_CourseId",
+                table: "Document",
                 column: "CourseId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Documents_ModuleId",
-                table: "Documents",
+                name: "IX_Document_ModuleId",
+                table: "Document",
                 column: "ModuleId");
 
             migrationBuilder.CreateIndex(
@@ -426,8 +427,8 @@ namespace LexiconLMS.Server.Migrations
                 column: "Use");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Modules_CourseId",
-                table: "Modules",
+                name: "IX_Module_CourseId",
+                table: "Module",
                 column: "CourseId");
 
             migrationBuilder.CreateIndex(
@@ -473,7 +474,7 @@ namespace LexiconLMS.Server.Migrations
                 name: "DeviceCodes");
 
             migrationBuilder.DropTable(
-                name: "Documents");
+                name: "Document");
 
             migrationBuilder.DropTable(
                 name: "Keys");
@@ -485,19 +486,19 @@ namespace LexiconLMS.Server.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "Activities");
+                name: "Activity");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "ActivityTypes");
+                name: "ActivityType");
 
             migrationBuilder.DropTable(
-                name: "Modules");
+                name: "Module");
 
             migrationBuilder.DropTable(
-                name: "Courses");
+                name: "Course");
         }
     }
 }

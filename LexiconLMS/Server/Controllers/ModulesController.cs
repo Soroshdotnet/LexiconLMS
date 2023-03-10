@@ -25,10 +25,10 @@ namespace LexiconLMS.Server.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Module>>> GetModules()
         {
-          if (_context.Modules == null)
-          {
-              return NotFound();
-          }
+            if (_context.Modules == null)
+            {
+                return NotFound();
+            }
             return await _context.Modules.ToListAsync();
         }
 
@@ -36,10 +36,10 @@ namespace LexiconLMS.Server.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Module>> GetModule(int id)
         {
-          if (_context.Modules == null)
-          {
-              return NotFound();
-          }
+            if (_context.Modules == null)
+            {
+                return NotFound();
+            }
             var @module = await _context.Modules.FindAsync(id);
 
             if (@module == null)
@@ -86,10 +86,10 @@ namespace LexiconLMS.Server.Controllers
         [HttpPost]
         public async Task<ActionResult<Module>> PostModule(Module @module)
         {
-          if (_context.Modules == null)
-          {
-              return Problem("Entity set 'ApplicationDbContext.Modules'  is null.");
-          }
+            if (_context.Modules == null)
+            {
+                return Problem("Entity set 'ApplicationDbContext.Modules'  is null.");
+            }
             _context.Modules.Add(@module);
             await _context.SaveChangesAsync();
 
