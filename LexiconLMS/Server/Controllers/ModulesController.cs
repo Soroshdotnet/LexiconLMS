@@ -8,59 +8,59 @@ using Microsoft.EntityFrameworkCore;
 using LexiconLMS.Server.Data;
 using LexiconLMS.Server.Models;
 
-using LexiconLMS.Server.Repositories;
-
 namespace LexiconLMS.Server.Controllers
 {
-    [Route("api/courses")]
+    [Route("api/[controller]")]
     [ApiController]
-    public class CoursesController : ControllerBase
+    public class ModulesController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
-        private readonly IUnitOfWork unitOfWork;
 
-        public CoursesController(ApplicationDbContext context, IUnitOfWork unitOfWork)
+        public ModulesController(ApplicationDbContext context)
         {
             _context = context;
-            this.unitOfWork = unitOfWork;
         }
 
-        // GET: api/Courses
+        // GET: api/Modules
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Course>>> GetCourses()
+        public async Task<ActionResult<IEnumerable<Module>>> GetModules()
         {
-            return Ok(await unitOfWork.coursesRepository.GetAsync());
+            if (_context.Modules == null)
+            {
+                return NotFound();
+            }
+            return await _context.Modules.ToListAsync();
         }
 
-        // GET: api/Courses/5
+        // GET: api/Modules/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Course>> GetCourse(int id)
+        public async Task<ActionResult<Module>> GetModule(int id)
         {
-            if (_context.Courses == null)
+            if (_context.Modules == null)
             {
                 return NotFound();
             }
-            var course = await _context.Courses.FindAsync(id);
+            var @module = await _context.Modules.FindAsync(id);
 
-            if (course == null)
+            if (@module == null)
             {
                 return NotFound();
             }
 
-            return course;
+            return @module;
         }
 
-        // PUT: api/Courses/5
+        // PUT: api/Modules/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCourse(int id, Course course)
+        public async Task<IActionResult> PutModule(int id, Module @module)
         {
-            if (id != course.Id)
+            if (id != @module.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(course).State = EntityState.Modified;
+            _context.Entry(@module).State = EntityState.Modified;
 
             try
             {
@@ -68,7 +68,7 @@ namespace LexiconLMS.Server.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CourseExists(id))
+                if (!ModuleExists(id))
                 {
                     return NotFound();
                 }
@@ -81,44 +81,44 @@ namespace LexiconLMS.Server.Controllers
             return NoContent();
         }
 
-        // POST: api/Courses
+        // POST: api/Modules
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Course>> PostCourse(Course course)
+        public async Task<ActionResult<Module>> PostModule(Module @module)
         {
-            if (_context.Courses == null)
+            if (_context.Modules == null)
             {
-                return Problem("Entity set 'ApplicationDbContext.Courses'  is null.");
+                return Problem("Entity set 'ApplicationDbContext.Modules'  is null.");
             }
-            _context.Courses.Add(course);
+            _context.Modules.Add(@module);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetCourse", new { id = course.Id }, course);
+            return CreatedAtAction("GetModule", new { id = @module.Id }, @module);
         }
 
-        // DELETE: api/Courses/5
+        // DELETE: api/Modules/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCourse(int id)
+        public async Task<IActionResult> DeleteModule(int id)
         {
-            if (_context.Courses == null)
+            if (_context.Modules == null)
             {
                 return NotFound();
             }
-            var course = await _context.Courses.FindAsync(id);
-            if (course == null)
+            var @module = await _context.Modules.FindAsync(id);
+            if (@module == null)
             {
                 return NotFound();
             }
 
-            _context.Courses.Remove(course);
+            _context.Modules.Remove(@module);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool CourseExists(int id)
+        private bool ModuleExists(int id)
         {
-            return (_context.Courses?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Modules?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
