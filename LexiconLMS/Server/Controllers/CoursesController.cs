@@ -9,6 +9,7 @@ using LexiconLMS.Server.Data;
 using LexiconLMS.Server.Models;
 
 using LexiconLMS.Server.Repositories;
+using LexiconLMS.Shared.DTOs;
 
 namespace LexiconLMS.Server.Controllers
 {
@@ -27,7 +28,7 @@ namespace LexiconLMS.Server.Controllers
 
         // GET: api/Courses
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Course>>> GetCourses()
+        public async Task<ActionResult<IEnumerable<CourseDto>>> GetCourses()
         {
             return Ok(await unitOfWork.coursesRepository.GetAsync());
         }

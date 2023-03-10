@@ -18,28 +18,50 @@ namespace LexiconLMS.Server.Repositories
 
         public async Task<IEnumerable<CourseDto>> GetAsync()
         {
-            var courseDtos = db.Courses.Select(c => new CourseDto
-            {
-                Desc = c.Desc,
-                Name = c.Name,
-                Users = c.Users.Select(u => new UserDto
+            var courseDtos = db.Courses
+                .Include(c => c.Modules)
+                .Select(c => new CourseDto
                 {
-                    UserName = u.UserName,
-                    //Desc = m.Desc,
-                    Modules = c.Modules.Select(m => new ModuleDto
-                {
-                    Name = m.Name,
-                    Desc = m.Desc,
-                    Activitys = m.Activitys.Select(a => new ActivityDto
+                    Desc = c.Desc,
+                    Name = c.Name,
+                    Users = c.Users.Select(u => new UserDto
                     {
-                        Name = a.Name,
-                        Desc = a.Desc
-                    })
-                })
-                })
-            });
+                        UserName = u.UserName,
 
-            return await courseDtos.ToListAsync();  
+                        //10.3.2023. Attila Starkenius
+                        //Ändra ApiControllers till att returnera
+                        //och ha returntype DTO's och
+                        //gör i public async Task<IEnumerable<CourseDto>> GetAsync()
+                        // i CoursesRepository.cs classen 
+                        //omvänt Select.(c => new CourseDto{
+                        // Desc = c.Desc,
+                        //Name = c.Name,
+                        //Users = c.Users.Select(u => new UserDto
+                        //{
+                        //    UserName = u.UserName,
+                        //}
+
+
+
+
+
+                        //Course =  c
+                        //Desc = m.Desc,
+                        //Course =  u.Course
+                        //Modules = c.Modules.Select(m => new ModuleDto
+                        //{
+                        //    Name = m.Name,
+                        //    Desc = m.Desc,
+                        //    Activitys = m.Activitys.Select(a => new ActivityDto
+                        //    {
+                        //        Name = a.Name,
+                        //        Desc = a.Desc
+                        //    })
+                        //})
+                    })
+                });
+
+            return await courseDtos.ToListAsync();
         }
 
 
@@ -55,7 +77,9 @@ namespace LexiconLMS.Server.Repositories
         }
         public bool CourseExists(int id)
         {
-            return (db.Courses?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (db.Courses?
+                .Any(e => e.Id == id))
+                .GetValueOrDefault();
         }
     }
 }
