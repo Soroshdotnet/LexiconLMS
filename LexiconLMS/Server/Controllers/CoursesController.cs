@@ -28,49 +28,91 @@ namespace LexiconLMS.Server.Controllers
 
         // GET: api/Courses
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<CourseDto>>> GetCourses()
+        public async Task<ActionResult<IEnumerable<CourseDto>>> GetCourses(int id)
         {
-            return Ok(await unitOfWork.coursesRepository.GetAsync());
+            return Ok(await unitOfWork.coursesRepository.GetAsync(id));
         }
 
         // GET: api/Courses/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Course>> GetCourse(int id)
+        public async Task<ActionResult<CourseDto>> GetCourse(int id)
         {
-            if (_context.Courses == null)
-            {
-                return NotFound();
-            }
-            var course = await _context.Courses.FindAsync(id);
-
-            //var partner = await _context.Courses.Include
-            //    (p => p.Modules)./*.Include(p => p.)*/
-            //.FirstOrDefaultAsync(p => p.Modules. == id);
+            return Ok(await unitOfWork.coursesRepository.GetAsync(id));
 
 
-            //var modules = await _context.Modules.
-            //    FindAsync(_context.Modules.Where((e => e.CourseId == id)));
+            //if (_context.Courses == null)
+            //{
+            //    return NotFound();
+            //}
+            //var course = await _context.Courses.FindAsync(id);
 
-            //var activities = await _context.Activities.
-            //    FindAsync(_context.Activities.Where((e => e.ModuleId == id)));
+            ////var partner = await _context.Courses.Include
+            ////    (p => p.Modules)./*.Include(p => p.)*/
+            ////.FirstOrDefaultAsync(p => p.Modules. == id);
 
-            if (course == null)
-            {
-                return NotFound();
-            }
 
-            //if (modules == null)
+            ////var modules = await _context.Modules.
+            ////    FindAsync(_context.Modules.Where((e => e.CourseId == id)));
+
+            ////var activities = await _context.Activities.
+            ////    FindAsync(_context.Activities.Where((e => e.ModuleId == id)));
+
+            //if (course == null)
             //{
             //    return NotFound();
             //}
 
-            //if (activities == null)
-            //{
-            //    return NotFound();
-            //}
+            ////if (modules == null)
+            ////{
+            ////    return NotFound();
+            ////}
 
-            return course;
+            ////if (activities == null)
+            ////{
+            ////    return NotFound();
+            ////}
+
+            //return course;
         }
+
+        //// GET: api/Courses/5
+        //[HttpGet("{id}")]
+        //public async Task<ActionResult<Course>> GetCourse(int id)
+        //{
+        //    if (_context.Courses == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    var course = await _context.Courses.FindAsync(id);
+
+        //    //var partner = await _context.Courses.Include
+        //    //    (p => p.Modules)./*.Include(p => p.)*/
+        //    //.FirstOrDefaultAsync(p => p.Modules. == id);
+
+
+        //    //var modules = await _context.Modules.
+        //    //    FindAsync(_context.Modules.Where((e => e.CourseId == id)));
+
+        //    //var activities = await _context.Activities.
+        //    //    FindAsync(_context.Activities.Where((e => e.ModuleId == id)));
+
+        //    if (course == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    //if (modules == null)
+        //    //{
+        //    //    return NotFound();
+        //    //}
+
+        //    //if (activities == null)
+        //    //{
+        //    //    return NotFound();
+        //    //}
+
+        //    return course;
+        //}
 
         // PUT: api/Courses/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
