@@ -1,19 +1,26 @@
 @using LexiconLMS.Shared.DTOs;
 
 
-<div id="courseModules">
+<div id="courseModules" style="
+
+        display: flex;
+        flex-direction:column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+
+">
     @{
         if (courseSelected == null)
         {
-            <p>Välj kurs du vill ha information om</p>
+            <h3>Välj kurs du vill ha information om</h3>
         }
         else
         {
-            <h1>Kurs: @courseSelected.Name</h1>
-            <EditButton Top="-50px" Left="-4px"></EditButton>
+            <h1>@courseSelected.Name</h1>
+            <EditButton Top="-10px" Left="-4px"></EditButton>
         
-    <p>Kursbeskrivning:</p>
-    <p>@courseSelected.Desc</p>
+            <p>Kursbeskrivning:&nbsp;@courseSelected.Desc</p>
 
     
             if (courseSelected.Modules == null)

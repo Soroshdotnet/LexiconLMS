@@ -1,6 +1,6 @@
 @using LexiconLMS.Shared.DTOs;
 
-<div id="courseModules">
+<div id="courseModules" >
 
     @{
         if (courseSelected == null)
@@ -9,11 +9,10 @@
         }
         else
         {
-            <h1>Kurs: @courseSelected.Name</h1>
+            <h1>@courseSelected.Name</h1>
 
 
-            <p>Kursbeskrivning:</p>
-            <p>@courseSelected.Desc</p>
+            <p>Kursbeskrivning:&nbsp;@courseSelected.Desc</p>
 
 
             if (courseSelected.Modules == null)

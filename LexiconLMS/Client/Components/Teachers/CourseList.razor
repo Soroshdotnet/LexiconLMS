@@ -4,16 +4,25 @@
 
 
 
-<div id="courseList">
-    <b>Kurser</b>
-    <ul>
+<div id="courseList" >
+    <p>Kurser</p>
+    <ol class="list-group list-group-numbered">
         @foreach (var course in courseList)
         {
-            <li @onclick="async () => await GetCourse(course)" @onclick:stopPropagation="true">@course.Name</li>
+            //ToDo: Aktiv l�nk
+            @*class="list-group-item list-group-item-action active" aria-current="true"*@
+
+            <li class="list-group-item list-group-item-action" style="cursor: grab" @onclick="async () => await GetCourse(course)" @onclick:stopPropagation="true">
+            @course.Name  
+
+           @* <span class="badge bg-primary rounded-pill">14</span>*@           
+            </li>
+            
+           
         }
         
-    </ul>
-    <button>Create New</button>
+    </ol>
+    <button style="margin-top: 12px"  @onclick="()=>CreateCourse()" type="button" class="btn btn-primary">Skapa ny kurs</button>
 </div>
 
 @code {
@@ -36,6 +45,13 @@
         Console.WriteLine("From courseList GetCourse");
 
         await xGetCourse.InvokeAsync(course);
+    }
+
+    public void CreateCourse()
+    {
+        Console.WriteLine("CreateCourse");
+
+        
     }
     
 }

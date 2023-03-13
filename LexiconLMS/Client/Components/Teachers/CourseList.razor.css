@@ -1,0 +1,44 @@
+﻿
+#courseList {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: -10px 5px 25px 10px lightblue;
+    background-color: #fcfcfc;
+    border-radius: 12px;
+    padding: 12px;
+    font-size: 16px;
+    width: 100%;
+    opacity: 0.7;
+    
+}
+
+
+    #courseList:active {
+        /** Remove 3D Block Effect on Click **/
+
+        box-shadow: 5px 5px 2px 6px lightblue;
+        top: 10px;
+        margin-bottom: 0;
+        font-size: 11px;
+    }
+
+    #courseList:hover {
+        opacity: 1;
+        box-shadow: -5px 5px 24px 9px lightblue;
+        top: 10px;
+        margin-bottom: 0;
+        font-size: 16px;
+        width: 99%;
+        
+        background-color: #fdfdfd;
+    }
+
+    #courseList:active,
+    #courseList:focus {
+        /** Remove Chrome's Ugly Yellow Outline **/
+        outline: 0;
+    }
+
+
