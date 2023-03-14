@@ -18,7 +18,7 @@ namespace LexiconLMS.Server.Repositories
 
         public async Task<IEnumerable<CourseDto>> GetAsync()
         {
-            var courseDtos = db.Courses
+            var courseDtos = db.Courses.Include(c => db.ActivityTypes)
                 .Select(c => new CourseDto
                 {
                     Desc = c.Desc,
@@ -37,7 +37,12 @@ namespace LexiconLMS.Server.Repositories
                         Activitys = m.Activitys.Select(a => new ActivityDto
                         {
                             Name = a.Name,
-                            Desc = a.Desc
+                            Desc = a.Desc,
+                            ActivityTypes = c.ActivityTypes.Select(a => new ActivityTypeDto
+                            {
+                                Type = a.Type
+                                //Desc = a.Desc
+                            })
                         })
                     })
                 });
