@@ -23,6 +23,9 @@ namespace LexiconLMS.Server.Repositories
                 {
                     Desc = c.Desc,
                     Name = c.Name,
+                    /*Attila Starkenius try
+                     * to do Hämta AktivityType tillsammans med ModulAktiviteter*/
+                    //Activities = c.Modules.Select(m => new ActivityDto)
                     Users = c.Users.Select(u => new UserDto
                     {
                         UserName = u.UserName
