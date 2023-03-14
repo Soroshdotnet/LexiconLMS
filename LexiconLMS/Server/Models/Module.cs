@@ -13,7 +13,7 @@ namespace LexiconLMS.Server.Models
         public string Name { get; set; }
         public string Desc { get; set; }
         public DateTime StartTime { get; set; }
-        public TimeSpan Duration { get; set; }  
+        public TimeSpan Duration { get; set; }
 
 
         public Course Course { get; set; }

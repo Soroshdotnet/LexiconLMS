@@ -28,6 +28,10 @@
 
     protected override async Task OnInitializedAsync()
     {
+        //Who is this?
+        //Which course is this user attending to?
+        //Add Method GetAsync("someId")
+        //Add endpoint on server which returns course
         var res = (await CourseClient.GetAsync()).FirstOrDefault();
 
         if (res is not null)

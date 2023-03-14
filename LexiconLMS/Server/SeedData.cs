@@ -38,6 +38,8 @@ namespace LexiconLMS.Server
             var roleNames = new[] { "Teacher", "Student" };
             var teacherEmail = "teacher@lms.se";
 
+            var studentEmail = "student@lms.se";
+
 
             await CreateRoles(roleNames);
 
@@ -53,7 +55,10 @@ namespace LexiconLMS.Server
             await CreateStudents(100, roleNames[1], courses);
 
             var teacher = await AddTeacherAsync(teacherEmail, adminPW);
-            await AddToRoleAsync(teacher, roleNames[0]);
+            await AddToRoleAsync(teacher, roleNames[0]);            
+            
+            var student = await AddStudentAsync(studentEmail, adminPW);
+            await AddToRoleAsync(student, roleNames[1]);
 
             await db.SaveChangesAsync();
         }
@@ -87,7 +92,7 @@ namespace LexiconLMS.Server
 
                 };
 
-                var res = await userManager.CreateAsync(temp, adminPW);
+                var res = await userManager.CreateAsync(temp, adminPW!);
                 if (!res.Succeeded) throw new Exception(string.Join("\n", res.Errors));
 
                 await AddToRoleAsync(temp, role);
@@ -118,7 +123,26 @@ namespace LexiconLMS.Server
             var result = await userManager.CreateAsync(teacher, adminPW);
             if (!result.Succeeded) throw new Exception(string.Join("\n", result.Errors));
 
-            return teacher;
+            return teacher;            
+        }
+
+        private static async Task<ApplicationUser> AddStudentAsync(string studentEmail, string adminPW)
+        {
+            var found = await userManager.FindByEmailAsync(studentEmail);
+
+            if (found != null) return null!;
+
+            var student = new ApplicationUser
+            {
+                UserName = studentEmail,
+                Email = studentEmail,
+                CourseId = 1,
+            };
+
+            var result = await userManager.CreateAsync(student, adminPW);
+            if (!result.Succeeded) throw new Exception(string.Join("\n", result.Errors));
+
+            return student;
         }
 
         private static IEnumerable<Course> GetCourses(int nrOfCourses)

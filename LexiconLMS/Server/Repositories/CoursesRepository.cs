@@ -19,47 +19,29 @@ namespace LexiconLMS.Server.Repositories
         public async Task<IEnumerable<CourseDto>> GetAsync()
         {
             var courseDtos = db.Courses
-                .Include(c => c.Modules)
                 .Select(c => new CourseDto
                 {
                     Desc = c.Desc,
                     Name = c.Name,
+                    /*Attila Starkenius try
+                     * to do Hämta AktivityType tillsammans med ModulAktiviteter*/
+                    //Activities = c.Modules.Select(m => new ActivityDto)
                     Users = c.Users.Select(u => new UserDto
                     {
-                        UserName = u.UserName,
-
-                        //10.3.2023. Attila Starkenius
-                        //Ändra ApiControllers till att returnera
-                        //och ha returntype DTO's och
-                        //gör i public async Task<IEnumerable<CourseDto>> GetAsync()
-                        // i CoursesRepository.cs classen 
-                        //omvänt Select.(c => new CourseDto{
-                        // Desc = c.Desc,
-                        //Name = c.Name,
-                        //Users = c.Users.Select(u => new UserDto
-                        //{
-                        //    UserName = u.UserName,
-                        //}
-
-
-
-
-
-                        //Course =  c
-                        //Desc = m.Desc,
-                        //Course =  u.Course
-                        //Modules = c.Modules.Select(m => new ModuleDto
-                        //{
-                        //    Name = m.Name,
-                        //    Desc = m.Desc,
-                        //    Activitys = m.Activitys.Select(a => new ActivityDto
-                        //    {
-                        //        Name = a.Name,
-                        //        Desc = a.Desc
-                        //    })
-                        //})
+                        UserName = u.UserName
+                    }),
+                    Modules = c.Modules.Select(m => new ModuleDto
+                    {
+                        Name = m.Name,
+                        Desc = m.Desc,
+                        Activitys = m.Activitys.Select(a => new ActivityDto
+                        {
+                            Name = a.Name,
+                            Desc = a.Desc
+                        })
                     })
                 });
+               
 
             return await courseDtos.ToListAsync();
         }

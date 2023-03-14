@@ -1,6 +1,6 @@
 ﻿function reloadParent(message) {
 
-    console.log('Message from javascript', message);
+    console.log('Messege from javascript', message);
 
     parent.location.reload();
 }

@@ -14,6 +14,6 @@ namespace LexiconLMS.Server.Models
         public int Id { get; set; }
         public string Type { get; set; } = string.Empty;
 
-        public ICollection<Activity> Activitys { get; set;}
+        public ICollection<Activity> Activitys { get; set; }
     }
 }
