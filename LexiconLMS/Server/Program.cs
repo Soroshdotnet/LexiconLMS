@@ -11,6 +11,7 @@ using LexiconLMS.Server.MyModels;
 using Microsoft.Extensions.DependencyInjection;
 using LexiconLMS.Server.Repositories;
 using LexiconLMS.Client.Services;
+using LexiconLMS.Server.Claims;
 
 namespace LexiconLMS.Server
 {
@@ -37,6 +38,8 @@ namespace LexiconLMS.Server
             builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddRoles<IdentityRole>() //<-----
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            builder.Services.AddTransient<IClaimsTransformation, AddSubTransformation>();
 
             // Attila Starkenius Register CourseClient
             builder.Services.AddScoped<ICourseClient, CourseClient>();

@@ -38,20 +38,43 @@ namespace LexiconLMS.Server.Controllers
 
         // GET: api/Courses/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Course>> GetCourse(int id)
+        public async Task<ActionResult<CourseDto>> GetCourse(int id)
         {
             if (_context.Courses == null)
             {
                 return NotFound();
             }
-            var course = await _context.Courses.FindAsync(id);
 
-            if (course == null)
+            var courseDto = await _context.Courses
+               .Select(c => new CourseDto
+               {
+                   Id = c.Id,
+                   Desc = c.Desc,
+                   Name = c.Name,
+                   Users = c.Users.Select(u => new UserDto
+                   {
+                       UserName = u.UserName
+                   }),
+                   Modules = c.Modules.Select(m => new ModuleDto
+                   {
+                       Name = m.Name,
+                       Desc = m.Desc,
+                       Activitys = m.Activitys.Select(a => new ActivityDto
+                       {
+                           Name = a.Name,
+                           Desc = a.Desc
+                       })
+                   })
+               })
+               .FirstOrDefaultAsync(c => c.Id == id);
+
+
+            if (courseDto == null)
             {
                 return NotFound();
             }
 
-            return course;
+            return Ok(courseDto);
         }
 
         // PUT: api/Courses/5

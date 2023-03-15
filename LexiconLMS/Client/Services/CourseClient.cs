@@ -18,11 +18,17 @@ namespace LexiconLMS.Client.Services
         {
             var res = await httpClient.GetFromJsonAsync<IEnumerable<CourseDto>>($"api/courses/");
             return res;
+        }      
+        
+        public async Task<int> GetCourseIdAsync()
+        {
+            var res = await httpClient.GetFromJsonAsync<int>($"api/users/");
+            return res;
         }
 
-        public async Task<IEnumerable<CourseDto>?> GetAsyncId(int courseId)
+        public async Task<CourseDto?> GetAsyncId(int courseId)
         {
-            var res = await httpClient.GetFromJsonAsync<IEnumerable<CourseDto>>($"api/courses/{courseId}");
+            var res = await httpClient.GetFromJsonAsync<CourseDto>($"api/courses/{courseId}");
             return res;
         }
     }
