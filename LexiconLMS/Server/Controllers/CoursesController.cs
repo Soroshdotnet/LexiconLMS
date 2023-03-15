@@ -31,6 +31,9 @@ namespace LexiconLMS.Server.Controllers
         public async Task<ActionResult<IEnumerable<CourseDto>>> GetCourses()
         {
             return Ok(await unitOfWork.coursesRepository.GetAsync());
+
+
+
         }
 
         // GET: api/Courses/5
@@ -43,31 +46,10 @@ namespace LexiconLMS.Server.Controllers
             }
             var course = await _context.Courses.FindAsync(id);
 
-            //var partner = await _context.Courses.Include
-            //    (p => p.Modules)./*.Include(p => p.)*/
-            //.FirstOrDefaultAsync(p => p.Modules. == id);
-
-
-            //var modules = await _context.Modules.
-            //    FindAsync(_context.Modules.Where((e => e.CourseId == id)));
-
-            //var activities = await _context.Activities.
-            //    FindAsync(_context.Activities.Where((e => e.ModuleId == id)));
-
             if (course == null)
             {
                 return NotFound();
             }
-
-            //if (modules == null)
-            //{
-            //    return NotFound();
-            //}
-
-            //if (activities == null)
-            //{
-            //    return NotFound();
-            //}
 
             return course;
         }

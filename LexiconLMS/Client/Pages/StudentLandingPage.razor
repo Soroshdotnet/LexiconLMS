@@ -32,7 +32,7 @@
         //Which course is this user attending to?
         //Add Method GetAsync("someId")
         //Add endpoint on server which returns course
-        var res = (await CourseClient.GetAsync()).FirstOrDefault();
+        var res = (await CourseClient.GetAsyncId(int courseId)).FirstOrDefault();
 
         if (res is not null)
             //students = res.Users.ToList();

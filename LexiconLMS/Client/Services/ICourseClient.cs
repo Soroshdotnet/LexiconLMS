@@ -7,6 +7,9 @@ namespace LexiconLMS.Client.Services
 
         Task<IEnumerable<CourseDto>?> GetAsync();
 
+        Task<IEnumerable<CourseDto>?> GetAsyncId(int courseId);
+        
+
         /*
 
         Task<Course?> DeleteAsync(string id);
