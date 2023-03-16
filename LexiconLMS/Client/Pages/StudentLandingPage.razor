@@ -9,10 +9,16 @@
 <div id="studentLandingPage" class="container">
     <div class="row justify-content-center gx-5">
         <div class="col-3" style="align-content: end">
-            <CourseAttendees Students="course.Users"></CourseAttendees>
+            @if (course is not null)
+            {
+                <CourseAttendees Students="course.Users"></CourseAttendees>
+            }
         </div>
         <div class="col-9">
-            <CourseModules courseSelected="course"></CourseModules>
+            @if (course is not null)
+            {
+                <CourseModules courseSelected="course"></CourseModules>
+            }
         </div>
     </div>
 </div>
@@ -25,7 +31,7 @@
     [Inject]
     public ICourseClient CourseClient { get; set; } = default!;
 
-    public CourseDto course { get; set; }
+    public CourseDto? course { get; set; }
 
 
     //ToDo: Hämta elever
