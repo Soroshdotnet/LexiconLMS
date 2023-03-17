@@ -1,6 +1,5 @@
 ﻿using Bogus;
 using LexiconLMS.Server.Models;
-using LexiconLMS.Server.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -9,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LexiconLMS.Server
+namespace LexiconLMS.Server.Data
 {
     public class SeedData
     {
@@ -55,8 +54,8 @@ namespace LexiconLMS.Server
             await CreateStudents(100, roleNames[1], courses);
 
             var teacher = await AddTeacherAsync(teacherEmail, adminPW);
-            await AddToRoleAsync(teacher, roleNames[0]);            
-            
+            await AddToRoleAsync(teacher, roleNames[0]);
+
             var student = await AddStudentAsync(studentEmail, adminPW);
             await AddToRoleAsync(student, roleNames[1]);
 
@@ -123,7 +122,7 @@ namespace LexiconLMS.Server
             var result = await userManager.CreateAsync(teacher, adminPW);
             if (!result.Succeeded) throw new Exception(string.Join("\n", result.Errors));
 
-            return teacher;            
+            return teacher;
         }
 
         private static async Task<ApplicationUser> AddStudentAsync(string studentEmail, string adminPW)

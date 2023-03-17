@@ -8,6 +8,26 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="MyModels\**" />
+    <Content Remove="MyModels\**" />
+    <EmbeddedResource Remove="MyModels\**" />
+    <None Remove="MyModels\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controllers\ActivitiesController.cs" />
+    <Compile Remove="Controllers\DocumentsController.cs" />
+    <Compile Remove="Controllers\ModulesController.cs" />
+    <Compile Remove="Controllers\WeatherForecastController.cs" />
+    <Compile Remove="Repositories\ActivitiesRepository.cs" />
+    <Compile Remove="Repositories\DocumentsRepository.cs" />
+    <Compile Remove="Repositories\IActivitiesRepository.cs" />
+    <Compile Remove="Repositories\IDocumentsRepository.cs" />
+    <Compile Remove="Repositories\IModulesRepository.cs" />
+    <Compile Remove="Repositories\ModulesRepository.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Bogus" Version="34.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="7.0.3" />
   </ItemGroup>
