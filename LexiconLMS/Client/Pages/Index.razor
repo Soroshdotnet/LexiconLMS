@@ -1,19 +1,21 @@
 ﻿@page "/"
 @using LexiconLMS.Client.Components
 @using LexiconLMS.Client.Pages
+@using Microsoft.AspNetCore.Authorization;
 @using Microsoft.AspNetCore.Components.Authorization
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
 @inject IJSRuntime JavaScript
+@attribute [Authorize]
 
 <AuthorizeView>
     <Authorized>
 
-        <LoginDisplay />
-    </Authorized>
-    <NotAuthorized>
+@*        <LoginDisplay />
+*@    </Authorized>
+    @*<NotAuthorized>
         <ModalLogin RerenderParent="RerenderParent"></ModalLogin>
         
-    </NotAuthorized>
+    </NotAuthorized>*@
 </AuthorizeView>
 
 
@@ -27,11 +29,6 @@
 
 @code {
 
-    
-
-
-
-     
     private async void RerenderParent()
     {
 
@@ -39,12 +36,6 @@
         await JavaScript.InvokeVoidAsync("reloadParent", "reloadParent");
         
     }
-
-    
-
-    
-
-
 }
 
 
