@@ -25,7 +25,7 @@ namespace LexiconLMS.Server.Extensions
                 {
                     await SeedData.InitAsync(db, serviceProvider/*, adminPW*/);
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
 
                     throw;

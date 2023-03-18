@@ -3,7 +3,7 @@ using System.Reflection;
 
 namespace LexiconLMS.Shared.DTOs
 {
-
+#nullable disable
     public class UserDto
     {
 
