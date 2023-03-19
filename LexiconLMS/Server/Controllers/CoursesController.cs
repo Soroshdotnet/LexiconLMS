@@ -109,19 +109,38 @@ namespace LexiconLMS.Server.Controllers
         }
 
         // POST: api/Courses
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Course>> PostCourse(Course course)
         {
-            if (_context.Courses == null)
+            try
             {
-                return Problem("Entity set 'ApplicationDbContext.Courses'  is null.");
-            }
-            _context.Courses.Add(course);
-            await _context.SaveChangesAsync();
+                _context.Courses.Add(course);
+                await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetCourse", new { id = course.Id }, course);
+                return CreatedAtAction(nameof(GetCourse), new { id = course.Id }, course);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
+
+        //// POST: api/Courses
+        //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        //[HttpPost]
+        //public async Task<ActionResult<Course>> PostCourse(Course course)
+        //{
+        //    if (_context.Courses == null)
+        //    {
+        //        return Problem("Entity set 'ApplicationDbContext.Courses'  is null.");
+        //    }
+
+        //    _context.Courses.Add(course);
+        //    await _context.SaveChangesAsync();
+
+        //    return CreatedAtAction("GetCourse", new { id = course.Id }, course);
+        //}
+
 
         // DELETE: api/Courses/5
         [HttpDelete("{id}")]
