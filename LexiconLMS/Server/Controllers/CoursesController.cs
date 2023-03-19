@@ -10,6 +10,7 @@ using LexiconLMS.Server.Models;
 
 using LexiconLMS.Server.Repositories;
 using LexiconLMS.Shared.DTOs;
+using Microsoft.AspNetCore.Identity;
 
 namespace LexiconLMS.Server.Controllers
 {
@@ -37,7 +38,21 @@ namespace LexiconLMS.Server.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<CourseDto>> GetCourse(int id)
         {
-            return Ok(await unitOfWork.coursesRepository.GetAsync(id));
+            //User.Identity.Name.
+            //var courseId = await _context.Courses
+            //    .Select(c => c.Id).Where(/*Course.*/Id == id);
+
+            var courseId = _context.Courses.Where(x => x.Id == id).Select(x => x.Id).FirstOrDefault();
+
+
+            //        var queryLondonCustomers3 =
+            //from cust in _context.Courses
+            //where cust.Id == "id"    
+            //select cust;
+
+            return Ok(await unitOfWork.coursesRepository.GetAsync(courseId));
+
+            //return Ok(await unitOfWork.coursesRepository.GetAsync(id));
 
 
             //if (_context.Courses == null)
