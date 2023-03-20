@@ -2,13 +2,23 @@
 @using LexiconLMS.Client.Components.Students
 @using LexiconLMS.Shared.DTOs;
 @using LexiconLMS.Client.Services;
+@inject AuthenticationStateProvider AuthProvider
+
+
+
 <div id="studentLandingPage" class="container">
     <div class="row justify-content-center gx-5">
         <div class="col-3" style="align-content: end">
-            <CourseAttendees Students="students"></CourseAttendees>
+            @if (course is not null)
+            {
+                <CourseAttendees Students="course.Users"></CourseAttendees>
+            }
         </div>
         <div class="col-9">
-            <CourseModules courseSelected="course"></CourseModules>
+            @if (course is not null)
+            {
+                <CourseModules courseSelected="course"></CourseModules>
+            }
         </div>
     </div>
 </div>
@@ -16,11 +26,12 @@
 @code {
 
     private IEnumerable<UserDto> students = new List<UserDto>();
+    private int courseId;
 
     [Inject]
     public ICourseClient CourseClient { get; set; } = default!;
 
-    public CourseDto course { get; set; }
+    public CourseDto? course { get; set; }
 
 
     //ToDo: Hämta elever
@@ -28,11 +39,16 @@
 
     protected override async Task OnInitializedAsync()
     {
+
+
         //Who is this?
+        // var user = (await AuthProvider.GetAuthenticationStateAsync()).User;
         //Which course is this user attending to?
+        courseId = await CourseClient.GetCourseIdAsync();
+        //Check its not 0
         //Add Method GetAsync("someId")
         //Add endpoint on server which returns course
-        var res = (await CourseClient.GetAsync()).FirstOrDefault();
+        var res = await CourseClient.GetAsyncId(courseId);
 
         if (res is not null)
             //students = res.Users.ToList();

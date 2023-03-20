@@ -136,7 +136,7 @@ namespace LexiconLMS.Server
             {
                 UserName = studentEmail,
                 Email = studentEmail,
-                CourseId = 1,
+                CourseId = 2,
             };
 
             var result = await userManager.CreateAsync(student, adminPW);

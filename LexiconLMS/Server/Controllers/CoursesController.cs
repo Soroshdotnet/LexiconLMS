@@ -10,7 +10,6 @@ using LexiconLMS.Server.Models;
 
 using LexiconLMS.Server.Repositories;
 using LexiconLMS.Shared.DTOs;
-using Microsoft.AspNetCore.Identity;
 
 namespace LexiconLMS.Server.Controllers
 {
@@ -29,105 +28,54 @@ namespace LexiconLMS.Server.Controllers
 
         // GET: api/Courses
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<CourseDto>>> GetCourses(int id)
+        public async Task<ActionResult<IEnumerable<CourseDto>>> GetCourses()
         {
-            return Ok(await unitOfWork.coursesRepository.GetAsync(id));
+            return Ok(await unitOfWork.coursesRepository.GetAsync());
+
+
+
         }
 
         // GET: api/Courses/5
         [HttpGet("{id}")]
         public async Task<ActionResult<CourseDto>> GetCourse(int id)
         {
-            //User.Identity.Name.
-            //var courseId = await _context.Courses
-            //    .Select(c => c.Id).Where(/*Course.*/Id == id);
+            if (_context.Courses == null)
+            {
+                return NotFound();
+            }
 
-            var courseId = _context.Courses.Where(x => x.Id == id).Select(x => x.Id).FirstOrDefault();
+            var courseDto = await _context.Courses
+               .Select(c => new CourseDto
+               {
+                   Id = c.Id,
+                   Desc = c.Desc,
+                   Name = c.Name,
+                   Users = c.Users.Select(u => new UserDto
+                   {
+                       UserName = u.UserName
+                   }),
+                   Modules = c.Modules.Select(m => new ModuleDto
+                   {
+                       Name = m.Name,
+                       Desc = m.Desc,
+                       Activitys = m.Activitys.Select(a => new ActivityDto
+                       {
+                           Name = a.Name,
+                           Desc = a.Desc
+                       })
+                   })
+               })
+               .FirstOrDefaultAsync(c => c.Id == id);
 
 
-            //        var queryLondonCustomers3 =
-            //from cust in _context.Courses
-            //where cust.Id == "id"    
-            //select cust;
+            if (courseDto == null)
+            {
+                return NotFound();
+            }
 
-            return Ok(await unitOfWork.coursesRepository.GetAsync(courseId));
-
-            //return Ok(await unitOfWork.coursesRepository.GetAsync(id));
-
-
-            //if (_context.Courses == null)
-            //{
-            //    return NotFound();
-            //}
-            //var course = await _context.Courses.FindAsync(id);
-
-            ////var partner = await _context.Courses.Include
-            ////    (p => p.Modules)./*.Include(p => p.)*/
-            ////.FirstOrDefaultAsync(p => p.Modules. == id);
-
-
-            ////var modules = await _context.Modules.
-            ////    FindAsync(_context.Modules.Where((e => e.CourseId == id)));
-
-            ////var activities = await _context.Activities.
-            ////    FindAsync(_context.Activities.Where((e => e.ModuleId == id)));
-
-            //if (course == null)
-            //{
-            //    return NotFound();
-            //}
-
-            ////if (modules == null)
-            ////{
-            ////    return NotFound();
-            ////}
-
-            ////if (activities == null)
-            ////{
-            ////    return NotFound();
-            ////}
-
-            //return course;
+            return Ok(courseDto);
         }
-
-        //// GET: api/Courses/5
-        //[HttpGet("{id}")]
-        //public async Task<ActionResult<Course>> GetCourse(int id)
-        //{
-        //    if (_context.Courses == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    var course = await _context.Courses.FindAsync(id);
-
-        //    //var partner = await _context.Courses.Include
-        //    //    (p => p.Modules)./*.Include(p => p.)*/
-        //    //.FirstOrDefaultAsync(p => p.Modules. == id);
-
-
-        //    //var modules = await _context.Modules.
-        //    //    FindAsync(_context.Modules.Where((e => e.CourseId == id)));
-
-        //    //var activities = await _context.Activities.
-        //    //    FindAsync(_context.Activities.Where((e => e.ModuleId == id)));
-
-        //    if (course == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    //if (modules == null)
-        //    //{
-        //    //    return NotFound();
-        //    //}
-
-        //    //if (activities == null)
-        //    //{
-        //    //    return NotFound();
-        //    //}
-
-        //    return course;
-        //}
 
         // PUT: api/Courses/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
