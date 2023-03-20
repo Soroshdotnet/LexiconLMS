@@ -11,6 +11,7 @@ namespace LexiconLMS.Client.Services
 
         Task<int> GetCourseIdAsync();
 
+        Task<CourseDto> AddCourseAsync(CreateCourseDto dto);
 
         /*
 

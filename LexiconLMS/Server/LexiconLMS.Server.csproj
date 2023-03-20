@@ -9,9 +9,13 @@
 
   <ItemGroup>
     <Compile Remove="MyModels\**" />
+    <Compile Remove="Pages\Courses\**" />
     <Content Remove="MyModels\**" />
+    <Content Remove="Pages\Courses\**" />
     <EmbeddedResource Remove="MyModels\**" />
+    <EmbeddedResource Remove="Pages\Courses\**" />
     <None Remove="MyModels\**" />
+    <None Remove="Pages\Courses\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,6 +34,7 @@
   <ItemGroup>
     <PackageReference Include="Bogus" Version="34.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="7.0.3" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="7.0.5" />
   </ItemGroup>
 
   <ItemGroup>
@@ -42,8 +47,11 @@
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="7.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.ApiAuthorization.IdentityServer" Version="7.0.3" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.3" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.4">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
