@@ -67,7 +67,9 @@ namespace LexiconLMS.Server.Controllers
                        Activitys = m.Activitys.Select(a => new ActivityDto
                        {
                            Name = a.Name,
-                           Desc = a.Desc
+                           Desc = a.Desc,
+                           ActivityTypeName = a.ActivityType.Type
+
                        })
                    })
                })
