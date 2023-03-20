@@ -68,7 +68,7 @@ namespace LexiconLMS.Server.Repositories
 
                         })
                     })
-                }).FirstOrDefaultAsync(c => c.CourseId == courseId);
+                }).FirstOrDefaultAsync(c => c.Id == courseId);
                
 
             return  courseDto;

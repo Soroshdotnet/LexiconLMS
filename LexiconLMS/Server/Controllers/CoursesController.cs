@@ -10,6 +10,7 @@ using LexiconLMS.Server.Models;
 
 using LexiconLMS.Server.Repositories;
 using LexiconLMS.Shared.DTOs;
+using System.Security.Claims;
 
 namespace LexiconLMS.Server.Controllers
 {
@@ -44,6 +45,10 @@ namespace LexiconLMS.Server.Controllers
             {
                 return NotFound();
             }
+
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // will give the user's userId
+            var userName = User.FindFirstValue(ClaimTypes.Name); // will give the user's userName
+            var email = User.FindFirstValue(ClaimTypes.Email);
 
             var courseDto = await _context.Courses
                .Select(c => new CourseDto
