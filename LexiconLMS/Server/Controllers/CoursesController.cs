@@ -11,6 +11,7 @@ using LexiconLMS.Server.Models;
 using LexiconLMS.Server.Repositories;
 using LexiconLMS.Shared.DTOs;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace LexiconLMS.Server.Controllers
 {
@@ -46,6 +47,10 @@ namespace LexiconLMS.Server.Controllers
                 return NotFound();
             }
 
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // will give the user's userId
+            var userName = User.FindFirstValue(ClaimTypes.Name); // will give the user's userName
+            var email = User.FindFirstValue(ClaimTypes.Email);
+
             var courseDto = await _context.Courses
                .Select(c => new CourseDto
                {
@@ -54,7 +59,8 @@ namespace LexiconLMS.Server.Controllers
                    Name = c.Name,
                    Users = c.Users.Select(u => new UserDto
                    {
-                       UserName = u.UserName
+                       UserName = u.UserName,
+                       FullName = u.FullName
                    }),
                    Modules = c.Modules.Select(m => new ModuleDto
                    {
@@ -63,7 +69,15 @@ namespace LexiconLMS.Server.Controllers
                        Activitys = m.Activitys.Select(a => new ActivityDto
                        {
                            Name = a.Name,
-                           Desc = a.Desc
+                           Desc = a.Desc,//
+                                         //ActivityType = a.ActivityType.Select(b => new ActivityTypeDto
+                                         //{
+                                         //    Type = b.Type
+                                         //})
+
+                           ActivityTypeName = a.ActivityType.Type
+                           //ActivityType/*Name*/ = a.ActivityType/*.Type*/
+
                        })
                    })
                })

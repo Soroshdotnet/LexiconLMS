@@ -8,7 +8,10 @@
         }
         @foreach (var student in Students)
         {
-            <li @onclick="() => GetStudent(student.UserName)" @onclick:stopPropagation="true">@student.UserName</li>
+@*            <li @onclick="() => GetStudent(student.UserName)" @onclick:stopPropagation="true">@student.UserName</li>
+*@
+            <li @onclick="() => GetStudent(student.UserName)" @onclick:stopPropagation="true">@student.FullName</li>
+
         }
 
     </ul>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +22,9 @@ namespace LexiconLMS.Server.Models
         public int ModuleId { get; set; }
 
         public ActivityType ActivityType { get; set; }
+        [NotMapped]
+        public ICollection<ActivityType> ActivityTypes { get; set; }
+
         public int ActivityTypeId { get; set; }
     }
 }
