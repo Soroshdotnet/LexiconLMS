@@ -58,7 +58,8 @@ namespace LexiconLMS.Server.Controllers
                    Name = c.Name,
                    Users = c.Users.Select(u => new UserDto
                    {
-                       UserName = u.UserName
+                       UserName = u.UserName,
+                       FullName = u.FullName
                    }),
                    Modules = c.Modules.Select(m => new ModuleDto
                    {
@@ -73,7 +74,7 @@ namespace LexiconLMS.Server.Controllers
                                          //    Type = b.Type
                                          //})
 
-                           //ActivityTypeName = a.ActivityType.Type
+                           ActivityTypeName = a.ActivityType.Type
                            //ActivityType/*Name*/ = a.ActivityType/*.Type*/
 
                        })

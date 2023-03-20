@@ -77,17 +77,22 @@ namespace LexiconLMS.Server
 
         private static async Task CreateStudents(int nrOfUsers, string role, IEnumerable<Course> courses)
         {
-            var faker = new Faker("sv");
 
             var users = new List<ApplicationUser>();
 
             for (int i = 0; i < nrOfUsers; i++)
             {
-                var email = faker.Internet.Email();
+               var faker = new Faker("sv");
+                var firstName = faker.Person.FirstName;
+                var lastName = faker.Person.LastName;
+                var email = faker.Internet.Email(firstName, lastName);
+
                 var temp = new ApplicationUser
                 {
                     Email = email,
                     UserName = email,
+                    FirstName = firstName,
+                    LastName = lastName,
                     Course = faker.PickRandom(courses)
 
                 };
@@ -118,6 +123,8 @@ namespace LexiconLMS.Server
             {
                 UserName = teacherEmail,
                 Email = teacherEmail,
+                FirstName = "Teacher",
+                LastName = "LMS"
             };
 
             var result = await userManager.CreateAsync(teacher, adminPW);
