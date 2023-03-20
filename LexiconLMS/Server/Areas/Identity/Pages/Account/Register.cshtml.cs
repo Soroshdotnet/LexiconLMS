@@ -85,6 +85,10 @@ namespace LexiconLMS.Server.Areas.Identity.Pages.Account
             [Display(Name = "Firstname")]
             public string FirstName { get; set; }
 
+            [Required]
+            [Display(Name = "Lastname")]
+            public string LastName { get; set; }
+
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
@@ -126,6 +130,7 @@ namespace LexiconLMS.Server.Areas.Identity.Pages.Account
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 user.FirstName = Input.FirstName;
+                user.LastName = Input.FirstName;
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)
