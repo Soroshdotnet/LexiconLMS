@@ -4,7 +4,7 @@ using System.Reflection;
 //using LexiconLMS.Server.Models
 namespace LexiconLMS.Shared.DTOs
 {
-
+#nullable disable
     public class UserDto
     {
         //public ApplicationUserDto

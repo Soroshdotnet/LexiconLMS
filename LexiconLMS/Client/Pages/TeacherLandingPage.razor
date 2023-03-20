@@ -4,7 +4,6 @@
 @using LexiconLMS.Client.Services;
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
     
-
 @inject AuthenticationStateProvider authenticationStateProvider;
 @inject IAccessTokenProvider accessTokenProvider;
 
@@ -34,7 +33,7 @@
     protected override async Task OnInitializedAsync()
     {
         var res = await CourseClient.GetAsync();
-        courses = res;
+        courses = res!;
     }   
 
     public void selectCourse(CourseDto course)

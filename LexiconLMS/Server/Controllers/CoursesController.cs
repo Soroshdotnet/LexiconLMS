@@ -10,6 +10,7 @@ using LexiconLMS.Server.Models;
 
 using LexiconLMS.Server.Repositories;
 using LexiconLMS.Shared.DTOs;
+using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 
 namespace LexiconLMS.Server.Controllers
@@ -123,18 +124,29 @@ namespace LexiconLMS.Server.Controllers
         }
 
         // POST: api/Courses
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Course>> PostCourse(Course course)
+      //  [Authorize(Roles ="Teacher")]
+        public async Task<ActionResult<Course>> PostCourse(CreateCourseDto dto)
         {
-            if (_context.Courses == null)
+            try
             {
-                return Problem("Entity set 'ApplicationDbContext.Courses'  is null.");
-            }
-            _context.Courses.Add(course);
-            await _context.SaveChangesAsync();
+                //ToDo: Add startdate and enddate
+                var course = new Course
+                {
+                    Name = dto.Name,
+                    Desc = dto.Desc
+                }; 
+                _context.Courses.Add(course);
+                await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetCourse", new { id = course.Id }, course);
+                //ToDo return DTO, Dont expose Course obj
+
+                return CreatedAtAction(nameof(GetCourse), new { id = course.Id }, course);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // DELETE: api/Courses/5

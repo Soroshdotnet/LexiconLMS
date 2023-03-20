@@ -31,6 +31,14 @@ namespace LexiconLMS.Client.Services
             var res = await httpClient.GetFromJsonAsync<CourseDto>($"api/courses/{courseId}");
             return res;
         }
+
+        public async Task<CourseDto?> AddCourseAsync(CreateCourseDto dto)
+        {
+            //ToDo call API 
+            //Example below... Simpliest possible
+           var res = await  httpClient.PostAsJsonAsync("api/courses", dto);
+            return res.IsSuccessStatusCode ?  await res.Content.ReadFromJsonAsync<CourseDto>() : null;
+        }
     }
 }
 
