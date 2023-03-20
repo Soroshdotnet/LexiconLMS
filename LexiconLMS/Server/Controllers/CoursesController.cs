@@ -68,7 +68,13 @@ namespace LexiconLMS.Server.Controllers
                        {
                            Name = a.Name,
                            Desc = a.Desc,
-                           ActivityTypeName = a.ActivityType.Type
+                           ActivityType = a.ActivityType.Select(b => new ActivityTypeDto
+                           {
+                               Type = b.Type
+                           })
+
+                            //ActivityTypeName = a.ActivityType.Type
+                            //ActivityType/*Name*/ = a.ActivityType/*.Type*/
 
                        })
                    })
