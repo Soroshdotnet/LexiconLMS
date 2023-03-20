@@ -82,10 +82,12 @@ namespace LexiconLMS.Server.Areas.Identity.Pages.Account
 
 
             [Required]
+            [StringLength(30, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 2)]
             [Display(Name = "Firstname")]
             public string FirstName { get; set; }
 
             [Required]
+            [StringLength(30, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 2)]
             [Display(Name = "Lastname")]
             public string LastName { get; set; }
 
