@@ -1,7 +1,7 @@
 @using LexiconLMS.Shared.DTOs;
 
 <div id="moduleActivites">
-    <p><b>Moduler:</b></p>
+    <p class="list-group list-group-flush"><b>Modules in this course:</b></p>
 
     <div class="accordion" id="accordionPanelsStayOpenExample">
 
@@ -17,12 +17,14 @@
 
             <div class="accordion-item">
 
-                <h2 class="accordion-header" id="panelsStayOpen-heading@(i)">
+                <h2 class="accordion-header"  id="panelsStayOpen-heading@(i)">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse@(i)" aria-expanded="false" aria-controls="panelsStayOpen-collapse@(i)">
                         @module.Name
                     </button>
                 </h2>
-                <EditButton Top="-48px" Left="0px"></EditButton>
+                
+                <!--<EditButton Top="-48px" Left="0px"></EditButton>-->
+
                 <div id="panelsStayOpen-collapse@(i)" class="accordion-collapse collapse @(i==1 ? "show" : "")" aria-labelledby="panelsStayOpen-headingOne">
                     <div class="accordion-body">
 

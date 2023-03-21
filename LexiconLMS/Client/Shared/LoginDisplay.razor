@@ -6,35 +6,41 @@
 
 <div class="row g-2">
 
-<AuthorizeView>
+<AuthorizeView Roles="Teacher">
     <Authorized>
             <div class="col-10" style="text-align: right;">
                 <div class="p-3">
                     <a href="authentication/profile">Hello, @context.User.Identity?.Name!</a>
-                    </div>
+
+                    <NavLink href="/AddCourse"> <button class="btn btn-outline-primary">Add Course</button></NavLink>
+
+                </div>
             </div>
             <div class="col-2">
                 <div class="p-3">
                 <button class="btn btn-outline-primary" @onclick="BeginLogOut">Log out</button>
                 </div>
-            </div>
-        
-        
+            </div>    
     </Authorized>
-    <NotAuthorized>
+</AuthorizeView>
+
+<AuthorizeView Roles="Student">
+    <Authorized>
             <div class="col-10" style="text-align: right;">
                 <div class="p-3">
-
-        <a href="authentication/register">Register</a>
-        </div>
-        </div>
-            <div class="col-2" style="text-align: right;">
+                    <a href="authentication/profile">Hello, @context.User.Identity?.Name!</a>
+                </div>
+            </div>
+            <div class="col-2">
                 <div class="p-3">
-        <a href="authentication/login">Log in</a>
-        </div>
-        </div>
-    </NotAuthorized>
+                <button class="btn btn-outline-primary" @onclick="BeginLogOut">Log out</button>
+                </div>
+            </div>    
+    </Authorized>
 </AuthorizeView>
+
+
+
 </div>
 @code{
     private void BeginLogOut()
