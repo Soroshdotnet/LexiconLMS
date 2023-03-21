@@ -1,0 +1,53 @@
+﻿@using LexiconLMS.Client.Services;
+@using LexiconLMS.Shared.DTOs;
+@page "/AddModule/{courseId}"
+@inject ICourseClient http
+@inject NavigationManager NavMan
+
+
+<h3>AddModule</h3>
+
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <EditForm EditContext="editContext" OnValidSubmit="CreateCourse">
+            <DataAnnotationsValidator></DataAnnotationsValidator>
+            <div class="form-group">
+                <label asp-for="@createModuleDto.Name" class="control-label"></label>
+                <InputText @bind-Value="createModuleDto.Name" class="form-control"></InputText>
+                <ValidationMessage For="() => createModuleDto.Name"></ValidationMessage>
+            </div>
+          
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </EditForm>
+    </div>
+</div>
+
+
+
+@code {
+    private CreateModuleDto createModuleDto = new CreateModuleDto();
+    private EditContext editContext = default!;
+
+    [Parameter]
+    public string courseId { get; set; }
+
+    protected override void OnInitialized()
+    {
+        editContext = new EditContext(createModuleDto);
+    }
+
+    private async Task CreateCourse()
+    {
+        createModuleDto.CourseId = int.Parse(courseId);
+        var res = await http.AddModuleAsync(createModuleDto);
+        //If ok add course!!!! 
+
+        //Navigate back to Landingpage use Navigationmanager!!!!
+        NavMan.NavigateTo("/", new  NavigationOptions());
+    }
+
+}

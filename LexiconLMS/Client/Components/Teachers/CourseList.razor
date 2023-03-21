@@ -10,10 +10,12 @@
         @foreach (var course in courseList)
         {
             <li @onclick="async () => await GetCourse(course)" @onclick:stopPropagation="true">@course.Name</li>
+            <NavLink href="@($"AddModule/{course.Id}")"><button>Add module</button></NavLink>
+            
         }
         
     </ul>
-    <NavLink href="/AddCourses"> <button> Create Course</button></NavLink>
+    <NavLink  href="AddCourse"> <button> Create Course</button></NavLink>
 </div>
 
 @code {
@@ -37,5 +39,7 @@
 
         await xGetCourse.InvokeAsync(course);
     }
-    
+
+  
+
 }

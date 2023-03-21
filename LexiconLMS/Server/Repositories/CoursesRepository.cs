@@ -21,6 +21,7 @@ namespace LexiconLMS.Server.Repositories
             var courseDtos = db.Courses
                 .Select(c => new CourseDto
                 {
+                    Id= c.Id,
                     Desc = c.Desc,
                     Name = c.Name,
                     Users = c.Users.Select(u => new UserDto

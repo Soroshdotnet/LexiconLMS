@@ -1,7 +1,8 @@
 ﻿@using LexiconLMS.Client.Services;
 @using LexiconLMS.Shared.DTOs;
-@page "/addcourse"
+@page "/AddCourse"
 @inject ICourseClient http
+@inject NavigationManager NavMan
 
 
 <h3>AddCourse</h3>
@@ -48,7 +49,7 @@
         //If ok add course!!!! 
 
         //Navigate back to Landingpage use Navigationmanager!!!!
-
+        NavMan.NavigateTo("/", new  NavigationOptions());
     }
 
 }

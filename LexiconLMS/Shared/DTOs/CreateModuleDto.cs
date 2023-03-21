@@ -2,7 +2,7 @@
 
 namespace LexiconLMS.Shared.DTOs
 {
-    public class CreateCourseDto
+    public class CreateModuleDto
     {
 #nullable disable
         [Required]
@@ -14,9 +14,10 @@ namespace LexiconLMS.Shared.DTOs
 
         //ToDo  Enddate cant be before startdate
         public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
+        public TimeSpan Duration { get; set; }
+
+        public int  CourseId { get; set; }
 
 
-
-    } 
+    }
 }

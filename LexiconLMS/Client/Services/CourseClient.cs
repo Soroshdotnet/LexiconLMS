@@ -39,6 +39,17 @@ namespace LexiconLMS.Client.Services
            var res = await  httpClient.PostAsJsonAsync("api/courses", dto);
             return res.IsSuccessStatusCode ?  await res.Content.ReadFromJsonAsync<CourseDto>() : null;
         }
+
+        public async Task<bool> AddModuleAsync(CreateModuleDto dto)
+        {
+            if (dto is null)
+            {
+                throw new ArgumentNullException(nameof(dto));
+            }
+
+            var res = await httpClient.PostAsJsonAsync("api/modules", dto);
+            return res.IsSuccessStatusCode ? true : false;
+        }
     }
 }
 
