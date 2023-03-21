@@ -3,9 +3,9 @@
 @page "/AddModule/{courseId}"
 @inject ICourseClient http
 @inject NavigationManager NavMan
+@inject NavigationManager navigationManager
 
-
-<h3>AddModule</h3>
+<h3 @onclick="GoBack">AddModule</h3>
 
 
 <hr />
@@ -15,13 +15,23 @@
             <DataAnnotationsValidator></DataAnnotationsValidator>
             <div class="form-group">
                 <label asp-for="@createModuleDto.Name" class="control-label"></label>
-                <InputText @bind-Value="createModuleDto.Name" class="form-control"></InputText>
+                <InputText @bind-Value="createModuleDto.Name" class="form-control"
+                placeholder = "Enter Module Titel"></InputText>
                 <ValidationMessage For="() => createModuleDto.Name"></ValidationMessage>
             </div>
-          
+            
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <label asp-for="@createModuleDto.Desc" class="control-label"></label>
+                <InputText @bind-Value="createModuleDto.Desc" class="form-control"
+                placeholder = "Enter Module Description"></InputText>
+                <ValidationMessage For="() => createModuleDto.Desc"></ValidationMessage>
             </div>
+          
+            <div class="form-group mt-4">
+                <input type="submit" value="Create" class="btn btn-primary mr-2" />
+                <button @onclick="GoBack" class="btn btn-outline-primary">Go Back</button>
+            </div>
+
         </EditForm>
     </div>
 </div>
@@ -50,4 +60,5 @@
         NavMan.NavigateTo("/", new  NavigationOptions());
     }
 
+    private void GoBack() => navigationManager.NavigateTo("/");
 }

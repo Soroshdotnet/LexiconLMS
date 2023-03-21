@@ -1,4 +1,6 @@
 @using LexiconLMS.Shared.DTOs;
+@using LexiconLMS.Client.Services;
+
 
 <div id="moduleActivites">
     <p class="list-group list-group-flush"><b>Modules in this course:</b></p>
@@ -24,7 +26,9 @@
                 </h2>
                 
                 <!--<EditButton Top="-48px" Left="0px"></EditButton>-->
-
+                
+                <NavLink href="@($"AddModule/{course.Id}")"><button class="btn btn-link">Add module</button></NavLink>
+                
                 <div id="panelsStayOpen-collapse@(i)" class="accordion-collapse collapse @(i==1 ? "show" : "")" aria-labelledby="panelsStayOpen-headingOne">
                     <div class="accordion-body">
 
@@ -51,5 +55,23 @@
     //{
     //    Console.WriteLine("From activitites, edit button2");
     //}
+        [Parameter]
+    public IEnumerable<CourseDto> courseList { get; set; } = new List<CourseDto>();
 
+    private void doSomething()
+    {
+
+        Console.WriteLine("From courseList");
+    }
+
+    [Parameter]
+    public EventCallback<CourseDto> xGetCourse { get; set; }
+
+
+    public async Task GetCourse(CourseDto course)
+    {
+        Console.WriteLine("From courseList GetCourse");
+
+        await xGetCourse.InvokeAsync(course);
+    }
 }
