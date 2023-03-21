@@ -1,0 +1,74 @@
+﻿@using LexiconLMS.Client.Services;
+@using LexiconLMS.Shared.DTOs;
+@page "/addmodule"
+@inject IModuleClient http
+@inject NavigationManager navigationManager
+
+@attribute [Authorize(Roles="Teacher")]
+
+
+<h3 @onclick="GoBack">AddModule</h3>
+
+
+<hr />
+<div class="row mb-4" >
+    <div class="col-md-4">
+
+        <EditForm EditContext="editContext" OnValidSubmit="CreateModule" >
+            <DataAnnotationsValidator></DataAnnotationsValidator>
+            <ValidationSummary></ValidationSummary>
+            
+
+@*            <div class="form-group">
+                <label asp-for="Module.Name" class="control-label"></label>
+                <InputText @bind-Value="CreateModuleDto.Name" class="form-control"
+                placeholder = "Enter Title"></InputText>
+                <ValidationMessage For="() => CreateModuleDto.Name"></ValidationMessage>
+            </div>
+                        
+           <div class="form-group">
+                <label asp-for="Course.Desc" class="control-label"></label>
+                <InputText @bind-Value="createCourseDto.Desc" class="form-control"
+                placeholder = "Enter Description"></InputText>
+                <ValidationMessage For="() => createCourseDto.Desc"></ValidationMessage>
+            </div>
+
+*@
+
+            <div class="form-group mt-4">
+                <input type="submit" value="Create" class="btn btn-primary mr-2" />
+                <button @onclick="GoBack" class="btn btn-outline-primary">Go Back</button>
+            </div>
+        </EditForm>
+ 
+    </div>
+</div>
+
+
+
+@code {
+    private CreateModuleDto createModuleDto = new CreateModuleDto();
+    private EditContext editContext = default!;
+
+    protected override void OnInitialized()
+    {
+        editContext = new EditContext(createModuleDto);
+    }
+
+    private async Task CreateModule()
+    {
+        //ToDo call API with HttpClient
+        var res = await http.AddModuleAsync(createModuleDto);
+        //If ok add course!!!! 
+
+        //Navigate back to Landingpage use Navigationmanager!!!!
+         navigationManager.NavigateTo("/"); //Fixed
+
+    }
+
+    private void GoBack()
+    {
+        navigationManager.NavigateTo("/");
+    }
+
+}

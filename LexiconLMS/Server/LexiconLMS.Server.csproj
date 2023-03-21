@@ -21,7 +21,6 @@
   <ItemGroup>
     <Compile Remove="Controllers\ActivitiesController.cs" />
     <Compile Remove="Controllers\DocumentsController.cs" />
-    <Compile Remove="Controllers\ModulesController.cs" />
     <Compile Remove="Controllers\WeatherForecastController.cs" />
     <Compile Remove="Repositories\ActivitiesRepository.cs" />
     <Compile Remove="Repositories\DocumentsRepository.cs" />

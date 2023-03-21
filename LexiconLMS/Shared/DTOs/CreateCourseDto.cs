@@ -25,8 +25,6 @@ namespace LexiconLMS.Shared.DTOs
 
         public DateTime EndDate { get; set; } = DateTime.Now.AddDays(5);
 
-        public string UserName { get; set; } 
-
 
     }
 
