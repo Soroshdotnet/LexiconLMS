@@ -3,18 +3,25 @@
     
 
 
-
-<div id="courseList">
-    <b>Kurser</b>
-    <ul>
-        @foreach (var course in courseList)
-        {
-            <li @onclick="async () => await GetCourse(course)" @onclick:stopPropagation="true">@course.Name</li>
-        }
-        
-    </ul>
-    <NavLink href="/AddCourses"> <button> Create Course</button></NavLink>
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Active Courses:</h5>
+        <div class="list-group" id="courseList">
+            @foreach (var course in courseList)
+            {
+                <a href="#" class="list-group-item list-group-item-action" @onclick="async () => await GetCourse(course)" @onclick:stopPropagation="true">@course.Name</a>
+            }
+            @if (courseList.Count() == 0)
+            {
+                <p>No courses found.</p>
+            }
+        </div>
+    </div>
 </div>
+
+
+
+
 
 @code {
 

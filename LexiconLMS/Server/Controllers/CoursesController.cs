@@ -130,11 +130,14 @@ namespace LexiconLMS.Server.Controllers
         {
             try
             {
-                //ToDo: Add startdate and enddate
+                //ToDo: FIXED Add startdate and enddate
                 var course = new Course
                 {
                     Name = dto.Name,
-                    Desc = dto.Desc
+                    Desc = dto.Desc,
+                    StartDate = dto.StartDate,
+                    EndDate = dto.EndDate
+
                 }; 
                 _context.Courses.Add(course);
                 await _context.SaveChangesAsync();

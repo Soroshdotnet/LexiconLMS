@@ -5,20 +5,20 @@
     @{
         if (courseSelected == null)
         {
-            <p>Välj kurs du vill ha information om</p>
+            <p>Select the course you want information about</p>
         }
         else
         {
-            <h1>Kurs: @courseSelected.Name</h1>
-            <EditButton Top="-50px" Left="-4px"></EditButton>
+            <h2 class="card-title">@courseSelected.Name</h2>
+           
+            //<EditButton Top="-50px" Left="-4px"></EditButton>
         
-    <p>Kursbeskrivning:</p>
-    <p>@courseSelected.Desc</p>
+             <h4 class="card-text">Description: @courseSelected.Desc</h4>
 
     
             if (courseSelected.Modules == null)
             {
-                <p>Finns inga moduler inlagda på denna kurs</p>
+                <p>No modules found in this course!</p>
             }
             else
             {
@@ -26,8 +26,6 @@
             }
         }
     }
-
-
 </div>
 
 @code {

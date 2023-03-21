@@ -1,21 +1,19 @@
 @using LexiconLMS.Shared.DTOs;
+
+
 <div id="courseAttendees">
-    <b>Attendees</b>
-    <ul>
+    <ul class="list-group">
+        <li class="list-group-item active"><b>Attendees</b></li>
         @if (Students.Count() == 0)
         {
-            <p>No Students added</p>
+            <li class="list-group-item">No Students added</li>
         }
         @foreach (var student in Students)
         {
-@*            <li @onclick="() => GetStudent(student.UserName)" @onclick:stopPropagation="true">@student.UserName</li>
-*@
-            <li @onclick="() => GetStudent(student.UserName)" @onclick:stopPropagation="true">@student.FullName</li>
-
+            <li class="list-group-item list-group-item-action" @onclick="() => GetStudent(student.UserName)" @onclick:stopPropagation="true">@student.FullName</li>
         }
-
     </ul>
-</div>
+</div> 
 
 @code {
 

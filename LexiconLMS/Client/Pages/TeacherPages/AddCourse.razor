@@ -2,31 +2,77 @@
 @using LexiconLMS.Shared.DTOs;
 @page "/addcourse"
 @inject ICourseClient http
+@inject NavigationManager navigationManager
+
+@attribute [Authorize(Roles="Teacher")]
 
 
-<h3>AddCourse</h3>
+<h3 @onclick="GoBack">AddCourse</h3>
 
 
 <hr />
-<div class="row">
+<div class="row mb-4" >
     <div class="col-md-4">
         <EditForm EditContext="editContext" OnValidSubmit="CreateCourse" >
             <DataAnnotationsValidator></DataAnnotationsValidator>
             <ValidationSummary></ValidationSummary>
+            
             <div class="form-group">
                 <label asp-for="Course.Name" class="control-label"></label>
-                <InputText @bind-Value="createCourseDto.Name" class="form-control"></InputText>
+                <InputText @bind-Value="createCourseDto.Name" class="form-control"
+                placeholder = "Enter Title"></InputText>
                 <ValidationMessage For="() => createCourseDto.Name"></ValidationMessage>
             </div>
+                        
+            <div class="form-group">
+                <label asp-for="Course.Desc" class="control-label"></label>
+                <InputText @bind-Value="createCourseDto.Desc" class="form-control"
+                placeholder = "Enter Description"></InputText>
+                <ValidationMessage For="() => createCourseDto.Desc"></ValidationMessage>
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="Course.StartDate" class="control-label"></label>
+                <InputDate @bind-Value="createCourseDto.StartDate" class="form-control"></InputDate>
+                <ValidationMessage For="() => createCourseDto.StartDate"></ValidationMessage>
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="Course.EndDate" class="control-label"></label>
+                <InputDate @bind-Value="createCourseDto.EndDate" class="form-control"></InputDate>
+                <ValidationMessage For="() => createCourseDto.EndDate"></ValidationMessage>
+            </div>
+            
+@*            <div class="form-group">
+                <label asp-for="Course.UserName" class="control-label"></label>
+                <InputSelect id="userdto" 
+                    @bind-Value="UserDto.UserName" class="form-control">
+                    @foreach (var UserName in UserDto)
+                    {
+                        <option value="@UserDto.UserName">@UserDto.UserName</option>
+                    }
+                placeholder = "Enter Student"></InputSelect>
+                <ValidationMessage For="() => UserDto.UserName"></ValidationMessage>
+            </div>
+ *@
+
+
             @*<div class="form-group">
                 <label asp-for="Course.Desc" class="control-label"></label>
                 <input asp-for="Course.Desc" class="form-control" />
                 <span asp-validation-for="Course.Desc" class="text-danger"></span>
             </div>*@
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+
+
+
+            <div class="form-group mt-4">
+                <input type="submit" value="Create" class="btn btn-primary mr-2" />
+                <button @onclick="GoBack" class="btn btn-outline-primary">Go Back</button>
             </div>
         </EditForm>
+             
+
+               
     </div>
 </div>
 
@@ -48,7 +94,13 @@
         //If ok add course!!!! 
 
         //Navigate back to Landingpage use Navigationmanager!!!!
+         navigationManager.NavigateTo("/"); //Fixed
 
+    }
+
+    private void GoBack()
+    {
+        navigationManager.NavigateTo("/");
     }
 
 }
