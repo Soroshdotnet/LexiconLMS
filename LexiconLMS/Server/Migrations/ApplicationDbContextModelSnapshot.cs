@@ -301,8 +301,14 @@ namespace LexiconLMS.Server.Migrations
                     b.Property<string>("Desc")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 

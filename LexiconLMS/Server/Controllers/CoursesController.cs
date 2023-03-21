@@ -125,32 +125,41 @@ namespace LexiconLMS.Server.Controllers
 
         // POST: api/Courses
         [HttpPost]
-      //  [Authorize(Roles ="Teacher")]
-        public async Task<ActionResult<Course>> PostCourse(CreateCourseDto dto)
+        //  [Authorize(Roles ="Teacher")]
+        public async Task<ActionResult<CourseDto>> PostCourse(CreateCourseDto dto)
         {
             try
             {
-                //ToDo: FIXED Add startdate and enddate
                 var course = new Course
                 {
                     Name = dto.Name,
                     Desc = dto.Desc,
                     StartDate = dto.StartDate,
                     EndDate = dto.EndDate
-
-                }; 
+                };
                 _context.Courses.Add(course);
                 await _context.SaveChangesAsync();
 
-                //ToDo return DTO, Dont expose Course obj
+                //ToDo: FIXED return DTO, Dont expose Course obj
 
-                return CreatedAtAction(nameof(GetCourse), new { id = course.Id }, course);
+
+                var courseDto = new CourseDto
+                {
+                    Id = course.Id,
+                    Name = course.Name,
+                    Desc = course.Desc,
+                    StartDate = course.StartDate,
+                    EndDate = course.EndDate
+                };
+
+                return CreatedAtAction(nameof(GetCourse), new { id = courseDto.Id }, courseDto);
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
         }
+
 
         // DELETE: api/Courses/5
         [HttpDelete("{id}")]

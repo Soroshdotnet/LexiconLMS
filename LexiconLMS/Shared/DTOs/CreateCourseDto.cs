@@ -16,15 +16,18 @@ namespace LexiconLMS.Shared.DTOs
         //ToDo  Enddate cant be before startdate
 
         [Required(ErrorMessage = "Start date is required.")]
-        [DisplayFormat(DataFormatString = "{0:2020-09-25}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
 
-        public DateTime StartDate { get; set; }
+        public DateTime StartDate { get; set; } = DateTime.Now;
 
         [Required(ErrorMessage = "End date is required.")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
 
-        public DateTime EndDate { get; set; }
-    
+        public DateTime EndDate { get; set; } = DateTime.Now.AddDays(5);
+
+        public string UserName { get; set; } 
+
+
     }
 
 
