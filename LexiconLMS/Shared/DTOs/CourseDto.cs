@@ -2,7 +2,7 @@
 
 namespace LexiconLMS.Shared.DTOs
 {
-
+#nullable disable
     public class CourseDto
     {
         public  int  Id { get; set; }
@@ -13,8 +13,6 @@ namespace LexiconLMS.Shared.DTOs
 
         public IEnumerable<ModuleDto> Modules { get; set; }
         public IEnumerable<UserDto> Users { get; set; }
-
-
 
     }  
 }

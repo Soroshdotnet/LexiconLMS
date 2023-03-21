@@ -13,6 +13,7 @@
 <hr />
 <div class="row mb-4" >
     <div class="col-md-4">
+
         <EditForm EditContext="editContext" OnValidSubmit="CreateCourse" >
             <DataAnnotationsValidator></DataAnnotationsValidator>
             <ValidationSummary></ValidationSummary>
@@ -42,8 +43,20 @@
                 <InputDate @bind-Value="createCourseDto.EndDate" class="form-control"></InputDate>
                 <ValidationMessage For="() => createCourseDto.EndDate"></ValidationMessage>
             </div>
-            
-@*            <div class="form-group">
+@*
+            <div class="form-group">
+                <label asp-for="UserDto.UserName" class="control-label"></label>
+                <InputSelect @bind-Value="createCourseDto.UserName" class="form-control">
+                @foreach (var UserName in UsersDto)
+                {
+                    <option value="@user.UserName">@user.UserName</option>
+                }
+                </InputSelect>
+                <ValidationMessage For="() => createCourseDto.UserName"></ValidationMessage>
+             </div>*@
+
+
+           @*<div class="form-group">
                 <label asp-for="Course.UserName" class="control-label"></label>
                 <InputSelect id="userdto" 
                     @bind-Value="UserDto.UserName" class="form-control">
@@ -53,9 +66,7 @@
                     }
                 placeholder = "Enter Student"></InputSelect>
                 <ValidationMessage For="() => UserDto.UserName"></ValidationMessage>
-            </div>
- *@
-
+            </div> *@
 
             @*<div class="form-group">
                 <label asp-for="Course.Desc" class="control-label"></label>
@@ -63,16 +74,12 @@
                 <span asp-validation-for="Course.Desc" class="text-danger"></span>
             </div>*@
 
-
-
             <div class="form-group mt-4">
                 <input type="submit" value="Create" class="btn btn-primary mr-2" />
                 <button @onclick="GoBack" class="btn btn-outline-primary">Go Back</button>
             </div>
         </EditForm>
-             
-
-               
+ 
     </div>
 </div>
 

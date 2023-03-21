@@ -160,7 +160,8 @@ namespace LexiconLMS.Server.Data
                 g.Name = f.Company.CatchPhrase();
                 g.Desc = f.Hacker.Verb();
                 //g.Duration = new TimeSpan(0, 55, 0);
-                //g.StartTime = DateTime.Now.AddDays(f.Random.Int(-5, 5));
+                g.StartDate = DateTime.Now.AddDays(f.Random.Int(-5, 5));
+                g.EndDate = DateTime.Now.AddDays(f.Random.Int(5, 30));
             });
 
             return faker.Generate(nrOfCourses);
